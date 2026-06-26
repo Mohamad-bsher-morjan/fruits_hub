@@ -23,6 +23,10 @@ class FruitHub extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       locale: const Locale('ar'),
       debugShowCheckedModeBanner: false,
+      builder: (context, child) => Directionality(
+        textDirection: TextDirection.rtl,
+        child: child!,
+      ),
       onGenerateRoute: onGenerateRoute,
       initialRoute: SplashView.routeName,
     );
