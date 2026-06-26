@@ -6,6 +6,6 @@ class OnBoardingViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [Expanded(child: OnBoardingPageView()),]);
+    return Column(children: [Expanded(child: OnBoardingPageView())]);
   }
 }
