@@ -22,7 +22,10 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(children: [SvgPicture.asset(Assets.imagesPlant)]),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: SvgPicture.asset(Assets.imagesPlant),
+        ),
         SvgPicture.asset(Assets.imagesLogo),
         SvgPicture.asset(Assets.imagesSplashBottom),
       ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/utils/app_text_styles.dart';
 import 'package:svg_flutter/svg.dart';
 
 class PageViewItem extends StatelessWidget {
@@ -7,13 +8,14 @@ class PageViewItem extends StatelessWidget {
     required this.image,
     required this.backgroundImage,
     required this.subTitle,
-    required this.title, required this.isVisible,
+    required this.title,
+    required this.isVisible,
   });
 
   final String image, backgroundImage;
   final String subTitle;
   final Widget title;
-final bool isVisible;
+  final bool isVisible;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -42,7 +44,12 @@ final bool isVisible;
                   padding: const EdgeInsets.all(16),
                   child: Align(
                     alignment: Alignment.topRight,
-                    child: Text('تخطي'),
+                    child: Text(
+                      'تخطي',
+                      style: AppStyles.regular13.copyWith(
+                        color: Color(0xff949d9e),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -54,8 +61,12 @@ final bool isVisible;
         title,
         SizedBox(height: 24),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Text(subTitle, textAlign: TextAlign.center),
+          padding: const EdgeInsets.symmetric(horizontal: 37),
+          child: Text(
+            subTitle,
+            textAlign: TextAlign.center,
+            style: AppStyles.semiBold13.copyWith(color: Color(0xff4e5456)),
+          ),
         ),
       ],
     );
