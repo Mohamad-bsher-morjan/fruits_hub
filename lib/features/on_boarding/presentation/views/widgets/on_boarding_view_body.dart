@@ -13,46 +13,51 @@ class OnBoardingViewBody extends StatefulWidget {
 }
 
 class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
- late PageController pageController ;
-int currentPage=0;
-@override
+  late PageController pageController;
+  int currentPage = 0;
+  @override
   void initState() {
-  
     super.initState();
-pageController = PageController();
-pageController.addListener(() {
-  setState(() {
-    currentPage=pageController.page!.round();
-  });
-},);
-    
+    pageController = PageController();
+
+    pageController.addListener(() {
+      currentPage = pageController.page!.round();
+      setState(() {});
+    });
   }
+
   @override
   void dispose() {
     pageController.dispose();
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(child: OnBoardingPageView()),
+        Expanded(child: OnBoardingPageView(pageController: pageController)),
         DotsIndicator(
           dotsCount: 2,
+          position: currentPage.toDouble(),
           decorator: DotsDecorator(
             activeColor: AppColors.primaryColor,
             color: AppColors.primaryColor.withValues(alpha: .5),
           ),
         ),
         const SizedBox(height: 10),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kHorizintalPadding),
-          child: CustomButton(
-            title: 'ابدأ الآن',
-            backgroundColor: AppColors.primaryColor,
-            onPressed: () {},
+        Visibility(
+          visible: currentPage == 1 ? true : false,
+          maintainSize: true,
+          maintainAnimation: true,
+          maintainState: true,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: kHorizintalPadding),
+            child: CustomButton(
+              title: 'ابدأ الآن',
+              backgroundColor: AppColors.primaryColor,
+              onPressed: () {},
+            ),
           ),
         ),
         const SizedBox(height: 43),
