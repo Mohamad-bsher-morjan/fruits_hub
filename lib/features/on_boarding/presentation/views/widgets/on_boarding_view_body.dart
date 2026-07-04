@@ -59,7 +59,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
               title: 'ابدأ الآن',
               backgroundColor: AppColors.primaryColor,
               onPressed: () {
-Prefs.setBool(kIsOnBoardingViewSeen, true);
+                Prefs.setBool(kIsOnBoardingViewSeen, true);
 
                 Navigator.of(context).pushReplacementNamed(LoginView.routeName);
               },
