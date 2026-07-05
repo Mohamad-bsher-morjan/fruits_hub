@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_hub/constants.dart';
 import 'package:fruits_hub/core/widgets/custom_text_field.dart';
+import 'package:fruits_hub/features/auth/presentation/views/widgets/terms_and_conditions.dart';
 
 class SignupViewBody extends StatelessWidget {
   const SignupViewBody({super.key});
@@ -12,7 +13,7 @@ class SignupViewBody extends StatelessWidget {
         padding: .symmetric(horizontal: kHorizintalPadding),
         child: Column(
           children: [
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             CustomTextFormField(
               hintText: 'الاسم كامل',
               textInputType: TextInputType.name,
@@ -21,13 +22,18 @@ class SignupViewBody extends StatelessWidget {
             CustomTextFormField(
               hintText: 'البريد الالكتروني',
               textInputType: TextInputType.emailAddress,
-              suffixIcon: Icon(Icons.remove_red_eye, color: Color(0xffc9cecf)),
+              
             ),
             SizedBox(height: 16),
             CustomTextFormField(
               hintText: 'كلمة المرور',
               textInputType: TextInputType.visiblePassword,
+              suffixIcon: Icon(Icons.remove_red_eye, color: Color(0xffc9cecf))
             ),
+            SizedBox(height: 16,),
+            TermsAndConditions(),
+
+            
           ],
         ),
       ),
