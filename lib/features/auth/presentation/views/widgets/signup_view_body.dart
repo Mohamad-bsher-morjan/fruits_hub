@@ -41,8 +41,8 @@ class SignupViewBody extends StatelessWidget {
               onPressed: () {},
               backgroundColor: AppColors.primaryColor,
             ),
-            SizedBox(height: 26,),
-            HaveAnAccount()
+            SizedBox(height: 26),
+            HaveAnAccount(),
           ],
         ),
       ),
