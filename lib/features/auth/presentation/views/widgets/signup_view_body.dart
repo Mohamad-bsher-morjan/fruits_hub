@@ -4,6 +4,7 @@ import 'package:fruits_hub/constants.dart';
 import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/widgets/custom_button.dart';
 import 'package:fruits_hub/core/widgets/custom_text_field.dart';
+import 'package:fruits_hub/core/widgets/password_field.dart';
 import 'package:fruits_hub/features/auth/presentation/cubits/signup_cubit.dart';
 import 'package:fruits_hub/features/auth/presentation/views/widgets/have_an_account.dart';
 import 'package:fruits_hub/features/auth/presentation/views/widgets/terms_and_conditions.dart';
@@ -48,16 +49,10 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                 textInputType: TextInputType.emailAddress,
               ),
               SizedBox(height: 16),
-              CustomTextFormField(
+              PasswordField(
                 onSaved: (value) {
                   password = value!;
                 },
-                hintText: 'كلمة المرور',
-                textInputType: TextInputType.visiblePassword,
-                suffixIcon: Icon(
-                  Icons.remove_red_eye,
-                  color: Color(0xffc9cecf),
-                ),
               ),
               SizedBox(height: 16),
               TermsAndConditions(),
@@ -88,3 +83,4 @@ class _SignupViewBodyState extends State<SignupViewBody> {
     );
   }
 }
+
