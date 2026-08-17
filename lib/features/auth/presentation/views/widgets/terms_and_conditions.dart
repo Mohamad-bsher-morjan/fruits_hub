@@ -2,15 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 
-class TermsAndConditions extends StatelessWidget {
-  const TermsAndConditions({super.key});
+class TermsAndConditions extends StatefulWidget {
+  const TermsAndConditions({super.key, required this.onChanged});
 
+  final ValueChanged<bool> onChanged;
+
+  @override
+  State<TermsAndConditions> createState() => _TermsAndConditionsState();
+}
+
+class _TermsAndConditionsState extends State<TermsAndConditions> {
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Checkbox(value: false, onChanged: (value) {}),
+        Checkbox(
+          value: isChecked,
+          onChanged: (value) {
+            setState(() {
+              isChecked = value ?? false;
+            });
+
+            widget.onChanged(isChecked);
+          },
+        ),
         Expanded(
           child: Text.rich(
             TextSpan(

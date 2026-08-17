@@ -21,7 +21,10 @@ class _SignupViewBodyState extends State<SignupViewBody> {
 
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
-  late String email, userName, password;
+  late final String email;
+  late final String userName;
+  late final String password;
+  late bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -55,7 +58,11 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                 },
               ),
               SizedBox(height: 16),
-              TermsAndConditions(),
+              TermsAndConditions(
+                onChanged: (value) {
+                  isChecked = value;
+                },
+              ),
               SizedBox(height: 16),
 
               CustomButton(
@@ -63,11 +70,21 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
-                    context.read<SignupCubit>().createUserWithEmailAndPassword(
-                      email,
-                      password,
-                      userName,
-                    );
+                    if (isChecked) {
+                      context
+                          .read<SignupCubit>()
+                          .createUserWithEmailAndPassword(
+                            email,
+                            password,
+                            userName,
+                          );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('يجب الموافقة على الشروط والأحكام'),
+                        ),
+                      );
+                    }
                   } else {
                     autovalidateMode = AutovalidateMode.always;
                   }
@@ -83,4 +100,3 @@ class _SignupViewBodyState extends State<SignupViewBody> {
     );
   }
 }
-
