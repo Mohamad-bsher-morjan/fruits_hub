@@ -40,7 +40,6 @@ class AuthRepoImpl extends AuthRepo {
   Future<Either<Failure, UserEntity>> signInWithEmailAndPasswor(
     String email,
     String password,
-    String name,
   ) async {
     try {
       var user = await firebaseAuthService.signInWithEmailAndPasswor(
