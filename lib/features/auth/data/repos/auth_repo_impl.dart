@@ -79,13 +79,13 @@ class AuthRepoImpl extends AuthRepo {
   Future<Either<Failure, UserEntity>> signInWithGoogle() async {
     User? user;
     try {
-      user = await firebaseAuthService.signInWithGoogle();
+       user = await firebaseAuthService.signInWithGoogle();
       var userEntity = UserEntity(
         name: user.displayName ?? '',
         email: user.email ?? '',
         uId: user.uid,
       );
-      await addUserData(user: userEntity);
+     await  addUserData(user: userEntity);
       return right(userEntity);
     } on CustomException catch (e) {
       await deleteUser(user);
