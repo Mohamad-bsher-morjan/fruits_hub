@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruits_hub/core/errors/exceptions.dart';
 import 'dart:developer';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-
 import 'package:google_sign_in/google_sign_in.dart';
 
 const String _googleServerClientId =
@@ -12,6 +10,10 @@ final Future<void> _googleSignInInitialization = GoogleSignIn.instance
     .initialize(serverClientId: _googleServerClientId);
 
 class FirebaseAuthService {
+  Future deleteUser() async {
+    await FirebaseAuth.instance.currentUser!.delete();
+  }
+
   Future<User> createUserWithEmailAndPasswor({
     required String email,
     required String password,
@@ -145,16 +147,6 @@ class FirebaseAuthService {
     }
   }
 
-
-Future<User> signInWithFacebook() async {
-  // Trigger the sign-in flow
-  final LoginResult loginResult = await FacebookAuth.instance.login();
-
-  // Create a credential from the access token
-  final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
-
-  // Once signed in, return the UserCredential
-  return (await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential)).user!;
+  // final OAuthCredential facebookAuthCredential =
+  //     FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
 }
-}
- 
