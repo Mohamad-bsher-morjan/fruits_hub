@@ -33,20 +33,22 @@ class AuthRepoImpl extends AuthRepo {
       await addUserData(user: userEntity);
       return right(userEntity);
     } on CustomException catch (e) {
-      if (user != null) {
-        await firebaseAuthService.deleteUser();
-      }
+      await deleteUser(user);
       return left(ServerFailure(errMessage: e.message));
     } catch (e) {
-      if (user != null) {
-        await firebaseAuthService.deleteUser();
-      }
+      await deleteUser(user);
       log(
         'Exception in AuthRepoImpl.createUserWithEmailAndPassword : ${e.toString()}',
       );
       return left(
         ServerFailure(errMessage: 'لقد حدث خطأ ما , الرجاء المحاولة مرة اخرى'),
       );
+    }
+  }
+
+  Future<void> deleteUser(User? user) async {
+    if (user != null) {
+      await firebaseAuthService.deleteUser();
     }
   }
 
@@ -75,10 +77,18 @@ class AuthRepoImpl extends AuthRepo {
 
   @override
   Future<Either<Failure, UserEntity>> signInWithGoogle() async {
+    User? user;
     try {
-      var user = await firebaseAuthService.signInWithGoogle();
-      return right(UserModel.fromFirebaseUser(user));
+      user = await firebaseAuthService.signInWithGoogle();
+      var userEntity = UserEntity(
+        name: user.displayName ?? '',
+        email: user.email ?? '',
+        uId: user.uid,
+      );
+      await addUserData(user: userEntity);
+      return right(userEntity);
     } on CustomException catch (e) {
+      await deleteUser(user);
       return left(ServerFailure(errMessage: e.message));
     } catch (e) {
       log('Exception in AuthRepoImpl.signInWithGoogle : ${e.toString()}');
