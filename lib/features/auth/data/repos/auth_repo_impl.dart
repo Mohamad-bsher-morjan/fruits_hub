@@ -62,7 +62,8 @@ class AuthRepoImpl extends AuthRepo {
         email: email,
         password: password,
       );
-      return right(UserModel.fromFirebaseUser(user));
+      var userEntity = await getUserData(uid: user.uid);
+      return right(userEntity);
     } on CustomException catch (e) {
       return left(ServerFailure(errMessage: e.message));
     } catch (e) {
@@ -79,13 +80,13 @@ class AuthRepoImpl extends AuthRepo {
   Future<Either<Failure, UserEntity>> signInWithGoogle() async {
     User? user;
     try {
-       user = await firebaseAuthService.signInWithGoogle();
+      user = await firebaseAuthService.signInWithGoogle();
       var userEntity = UserEntity(
         name: user.displayName ?? '',
         email: user.email ?? '',
         uId: user.uid,
       );
-     await  addUserData(user: userEntity);
+      await addUserData(user: userEntity);
       return right(userEntity);
     } on CustomException catch (e) {
       await deleteUser(user);
@@ -100,7 +101,20 @@ class AuthRepoImpl extends AuthRepo {
 
   @override
   Future<dynamic> addUserData({required UserEntity user}) async {
-    await databaseService.addData(BackendEndpoint.addUserdata, user.toMap());
+    await databaseService.addData(
+      BackendEndpoint.addUserdata,
+      user.toMap(),
+      user.uId,
+    );
+  }
+
+  @override
+  Future<UserEntity> getUserData({required String uid}) async {
+    var userData = await databaseService.getData(
+      path: BackendEndpoint.getUserData,
+      uId: uid,
+    );
+    return UserModel.fromMap(userData);
   }
 
   // @override
