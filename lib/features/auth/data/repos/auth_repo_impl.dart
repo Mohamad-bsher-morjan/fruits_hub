@@ -81,12 +81,17 @@ class AuthRepoImpl extends AuthRepo {
     User? user;
     try {
       user = await firebaseAuthService.signInWithGoogle();
-      var userEntity = UserEntity(
-        name: user.displayName ?? '',
-        email: user.email ?? '',
-        uId: user.uid,
+
+      var userEntity = UserModel.fromFirebaseUser(user);
+      var isUserExist = await databaseService.checkIfDataExists(
+        path: BackendEndpoint.isUserExists,
+        documentId: user.uid,
       );
-      await addUserData(user: userEntity);
+      if (isUserExist) {
+        await getUserData(uid: user.uid);
+      } else {
+        await addUserData(user: userEntity);
+      }
       return right(userEntity);
     } on CustomException catch (e) {
       await deleteUser(user);
