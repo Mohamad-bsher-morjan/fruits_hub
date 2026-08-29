@@ -3,7 +3,7 @@ import 'package:fruits_hub/constants.dart';
 import 'package:fruits_hub/core/services/shared_preferences_singleton.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 import 'package:fruits_hub/features/auth/presentation/views/signin_view.dart';
-import 'package:svg_flutter/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class PageViewItem extends StatelessWidget {
   const PageViewItem({
