@@ -3,7 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruits_hub/core/utils/app_images.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
-  const CustomBottomNavigationBar({super.key});
+  final void Function(int index)? onPressed;
+
+  const CustomBottomNavigationBar({
+    super.key,
+    this.onPressed,
+  });
 
   @override
   State<CustomBottomNavigationBar> createState() =>
@@ -19,6 +24,7 @@ class _CustomBottomNavigationBarState
     return Container(
       height: 75,
       decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(40)),
         color: Colors.white,
         border: Border(
           top: BorderSide(
@@ -36,26 +42,23 @@ class _CustomBottomNavigationBarState
             inactiveIconPath: Assets.imagesVuesaxOutlineHome,
             label: 'الرئيسية',
           ),
-
           _buildItem(
             index: 1,
+            activeIconPath: Assets.imagesVuesaxBoldProducts,
+            inactiveIconPath: Assets.imagesVuesaxOutlineProducts,
+            label: 'المنتجات',
+          ),
+          _buildItem(
+            index: 2,
             activeIconPath: Assets.imagesVuesaxBoldShoppingCart,
             inactiveIconPath: Assets.imagesVuesaxOutlineShoppingCart,
             label: '',
           ),
-
-          _buildItem(
-            index: 2,
-            activeIconPath: Assets.imagesVuesaxBoldProducts,
-            inactiveIconPath: Assets.imagesVuesaxOutlineProducts,
-            label: '',
-          ),
-
           _buildItem(
             index: 3,
             activeIconPath: Assets.imagesVuesaxBoldUser,
             inactiveIconPath: Assets.imagesVuesaxOutlineUser,
-            label: '',
+            label: 'حسابي',
           ),
         ],
       ),
@@ -75,6 +78,9 @@ class _CustomBottomNavigationBarState
         setState(() {
           currentIndex = index;
         });
+
+        // استدعاء onPressed الذي يأتي من الخارج
+        widget.onPressed?.call(index);
       },
       child: isSelected
           ? Container(
@@ -85,7 +91,6 @@ class _CustomBottomNavigationBarState
               decoration: BoxDecoration(
                 color: const Color(0xfff1f4f2),
                 borderRadius: BorderRadius.circular(30),
-
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -112,7 +117,6 @@ class _CustomBottomNavigationBarState
                       ),
                     ),
                   ),
-
                   if (label.isNotEmpty) ...[
                     const SizedBox(width: 6),
                     Text(
