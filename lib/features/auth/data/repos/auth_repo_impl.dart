@@ -66,6 +66,7 @@ class AuthRepoImpl extends AuthRepo {
         password: password,
       );
       var userEntity = await getUserData(uid: user.uid);
+      await saveUserData(user: userEntity);
       return right(userEntity);
     } on CustomException catch (e) {
       return left(ServerFailure(errMessage: e.message));
@@ -95,6 +96,7 @@ class AuthRepoImpl extends AuthRepo {
       } else {
         await addUserData(user: userEntity);
       }
+      await saveUserData(user: userEntity);
       return right(userEntity);
     } on CustomException catch (e) {
       await deleteUser(user);
@@ -130,21 +132,4 @@ class AuthRepoImpl extends AuthRepo {
     var jsonData = jsonEncode(UserModel.fromEntity(user).toMap());
     await Prefs.setString(kUserData, jsonData);
   }
-
-  // @override
-  // Future<Either<Failure, UserEntity>> signInWithFacebook() async {
-  //   try {
-  //     var user = await firebaseAuthService.signInWithFacebook();
-  //     return right(UserModel.fromFirebaseUser(user));
-  //   } on CustomException catch (e) {
-  //     return left(ServerFailure(errMessage: e.message));
-  //   } catch (e) {
-  //     log(
-  //       'Exception in AuthRepoImpl.signInWithFacebook : ${e.toString()}',
-  //     );
-  //     return left(
-  //       ServerFailure(errMessage: 'لقد حدث خطأ ما , الرجاء المحاولة مرة اخرى'),
-  //     );
-  //   }
-  // }
 }
