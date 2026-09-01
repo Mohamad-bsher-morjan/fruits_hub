@@ -147,6 +147,10 @@ class FirebaseAuthService {
     }
   }
 
+  bool isLoggedIn() {
+    return FirebaseAuth.instance.currentUser != null;
+  }
+
   // final OAuthCredential facebookAuthCredential =
   //     FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
 }

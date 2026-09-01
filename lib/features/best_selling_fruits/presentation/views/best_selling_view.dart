@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/widgets/custom_app_bar.dart';
 import 'package:fruits_hub/features/best_selling_fruits/presentation/views/widgets/best_selling_view_body.dart';
 
 class BestSellingView extends StatelessWidget {
@@ -7,7 +8,7 @@ class BestSellingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('الأكثر مبيعا')),
+      appBar: buildAppBar(context, title: 'الأكثر مبيعا'),
       body: BestSellingViewBody(),
     );
   }
