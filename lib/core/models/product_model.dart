@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:fruits_hub/core/entities/product_entity.dart';
 import 'package:fruits_hub/core/models/review_model.dart';
 
 class ProductModel {
@@ -17,6 +16,7 @@ class ProductModel {
   final num avgRating = 0;
   final num ratingCount = 0;
   final int unitAmount;
+  final num sellingCount;
   final List<ReviewModel> reviews;
 
   ProductModel({
@@ -32,28 +32,32 @@ class ProductModel {
     required this.unitAmount,
     required this.reviews,
     this.imageUrl,
+    this.sellingCount = 0,
   });
-
-  factory ProductModel.fromEntity(ProductEntity entity) {
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      reviews: entity.reviews.map((e) => ReviewModel.fromEntity(e)).toList(),
-      isOrganic: entity.isOrganic,
-      name: entity.name,
-      code: entity.code,
-      description: entity.description,
-      price: entity.price,
-      image: entity.image,
-      isFeatured: entity.isFeatured,
-      imageUrl: entity.imageUrl,
-      expirationsMonths: entity.expirationsMonths,
-      numberOfCalories: entity.numberOfCalories,
-      unitAmount: entity.unitAmount,
+      name: json['name'],
+      code: json['code'],
+      description: json['description'],
+      price: json['price'],
+      image: File(json['image']),
+      isFeatured: json['isFeatured'],
+      isOrganic: json['isOrganic'],
+      expirationsMonths: json['expirationsMonths'],
+      numberOfCalories: json['numberOfCalories'],
+      unitAmount: json['unitAmount'],
+      reviews: json['reviews'] != null
+          ? List<ReviewModel>.from(
+              json['reviews'].map((e) => ReviewModel.fromJson(e)),
+            )
+          : [],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'name': name,
+      'sellingCount': sellingCount,
       'code': code,
       'description': description,
       'price': price,
