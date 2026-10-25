@@ -17,12 +17,19 @@ class FireStoreService implements DatabaseService {
   }
 
   @override
-  Future<Map<String, dynamic>> getData({
+  Future<dynamic> getData({
     required String path,
-    required String uId,
+     String? uId
   }) async {
-    var data = await firestore.collection(path).doc(uId).get();
-    return data.data() as Map<String, dynamic>;
+    if (uId!=null) {
+      var data = await firestore.collection(path).doc(uId).get();
+      return data.data();
+    }
+    else{
+
+      var data =await firestore.collection(path).get();
+      return data.docs.map((e)=> e.data()).toList();
+    }
   }
 
   @override
