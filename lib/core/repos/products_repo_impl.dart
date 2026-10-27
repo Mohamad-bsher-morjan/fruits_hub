@@ -9,7 +9,7 @@ import 'package:fruits_hub/core/utils/backend_endpoint.dart';
 class ProductsRepoImpl extends ProductsRepo {
   final DatabaseService databaseService;
 
-  ProductsRepoImpl({required this.databaseService});
+  ProductsRepoImpl(this.databaseService);
 
   @override
   Future<Either<Failure, List<ProductEntity>>> getBestSellingProducts() async {
@@ -17,7 +17,11 @@ class ProductsRepoImpl extends ProductsRepo {
       var data =
           await databaseService.getData(
                 path: BackendEndpoint.getProducts,
-                query: {'limit': 10, 'orderBy': 'sellingCount','descending':true},
+                query: {
+                  'limit': 10,
+                  'orderBy': 'sellingCount',
+                  'descending': true,
+                },
               )
               as List<Map<String, dynamic>>;
 

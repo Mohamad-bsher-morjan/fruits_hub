@@ -18,7 +18,7 @@ class ProductsCubit extends Cubit<ProductsState> {
     );
   }
 
-    Future<void> getBestSellingProducts() async {
+  Future<void> getBestSellingProducts() async {
     emit(ProductsLoading());
     var result = await productsRepo.getBestSellingProducts();
     result.fold(
