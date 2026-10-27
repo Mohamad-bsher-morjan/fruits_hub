@@ -1,4 +1,3 @@
-
 import 'package:fruits_hub/core/entities/review_entity.dart';
 
 class ReviewModel {
@@ -25,7 +24,7 @@ class ReviewModel {
       reviewDiscription: entity.reviewDiscription,
     );
   }
-  factory ReviewModel.fromJson(Map<String, dynamic> json) {
+  factory ReviewModel.fromMap(Map<String, dynamic> json) {
     return ReviewModel(
       name: json['name'],
       image: json['image'],
@@ -35,7 +34,7 @@ class ReviewModel {
     );
   }
 
-ReviewEntity toEntity() {
+  ReviewEntity toEntity() {
     return ReviewEntity(
       name: name,
       image: image,
@@ -45,7 +44,7 @@ ReviewEntity toEntity() {
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
       'name': name,
       'image': image,

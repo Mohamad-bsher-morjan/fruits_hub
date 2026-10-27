@@ -53,7 +53,7 @@ class ProductModel {
     );
   }
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
+  factory ProductModel.fromMap(Map<String, dynamic> json) {
     return ProductModel(
       name: json['name'],
       code: json['code'],
@@ -67,13 +67,13 @@ class ProductModel {
       unitAmount: json['unitAmount'],
       reviews: json['reviews'] != null
           ? List<ReviewModel>.from(
-              json['reviews'].map((e) => ReviewModel.fromJson(e)),
+              json['reviews'].map((e) => ReviewModel.fromMap(e)),
             )
           : [],
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
       'name': name,
       'sellingCount': sellingCount,
@@ -86,7 +86,7 @@ class ProductModel {
       'numberOfCalories': numberOfCalories,
       'unitAmount': unitAmount,
       'isOrganic': isOrganic,
-      'reviews': reviews.map((e) => e.toJson()).toList(),
+      'reviews': reviews.map((e) => e.toMap()).toList(),
     };
   }
 }
