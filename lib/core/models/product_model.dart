@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:fruits_hub/core/entities/product_entity.dart';
+import 'package:fruits_hub/core/helper_functions/get_avg_rating.dart';
 import 'package:fruits_hub/core/models/review_model.dart';
 
 class ProductModel {
@@ -8,13 +7,13 @@ class ProductModel {
   final String code;
   final String description;
   final num price;
-  final File image;
+
   final bool isFeatured;
   String? imageUrl;
   final int expirationsMonths;
   final bool isOrganic;
   final int numberOfCalories;
-  final num avgRating = 0;
+  final num avgRating;
   final num ratingCount = 0;
   final int unitAmount;
   final num sellingCount;
@@ -25,7 +24,7 @@ class ProductModel {
     required this.code,
     required this.description,
     required this.price,
-    required this.image,
+    required this.avgRating,
     required this.isFeatured,
     required this.isOrganic,
     required this.expirationsMonths,
@@ -49,17 +48,17 @@ class ProductModel {
       numberOfCalories: numberOfCalories,
       unitAmount: unitAmount,
       reviews: reviews.map((e) => e.toEntity()).toList(),
-      image: image,
     );
   }
 
   factory ProductModel.fromMap(Map<String, dynamic> json) {
     return ProductModel(
+      avgRating: getAvgRating(json['reviews']),
       name: json['name'],
       code: json['code'],
       description: json['description'],
       price: json['price'],
-      image: File(json['image']),
+      imageUrl: json['imageUrl'] as String?,
       isFeatured: json['isFeatured'],
       isOrganic: json['isOrganic'],
       expirationsMonths: json['expirationsMonths'],
@@ -70,6 +69,7 @@ class ProductModel {
               json['reviews'].map((e) => ReviewModel.fromMap(e)),
             )
           : [],
+      sellingCount: json['sellingCount'] as num? ?? 0,
     );
   }
 

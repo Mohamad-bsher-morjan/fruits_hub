@@ -13,7 +13,7 @@ class ProductsCubit extends Cubit<ProductsState> {
     emit(ProductsLoading());
     var result = await productsRepo.getProducts();
     result.fold(
-      (failure) => emit(ProductsError(errMessage: failure.errMessage)),
+      (failure) => emit(ProductsFailuer(errMessage: failure.errMessage)),
       (products) => emit(ProductsSuccess(products: products)),
     );
   }
@@ -22,7 +22,7 @@ class ProductsCubit extends Cubit<ProductsState> {
     emit(ProductsLoading());
     var result = await productsRepo.getBestSellingProducts();
     result.fold(
-      (failure) => emit(ProductsError(errMessage: failure.errMessage)),
+      (failure) => emit(ProductsFailuer(errMessage: failure.errMessage)),
       (products) => emit(ProductsSuccess(products: products)),
     );
   }

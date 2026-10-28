@@ -31,7 +31,7 @@ class ProductsRepoImpl extends ProductsRepo {
 
       return right(products);
     } catch (e) {
-      return left(ServerFailure(errMessage: 'Failed to get products'));
+      return left(ServerFailure(errMessage: 'تعذر جلب المنتجات'));
     }
   }
 
@@ -48,7 +48,7 @@ class ProductsRepoImpl extends ProductsRepo {
 
       return right(products);
     } catch (e) {
-      return left(ServerFailure(errMessage: 'Failed to get products'));
+      return left(ServerFailure(errMessage: 'تعذر جلب المنتجات'));
     }
   }
 }

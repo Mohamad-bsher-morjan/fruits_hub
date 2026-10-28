@@ -13,8 +13,8 @@ class ProductsSuccess extends ProductsState {
   ProductsSuccess({required this.products});
 }
 
-class ProductsError extends ProductsState {
+class ProductsFailuer extends ProductsState {
   final String errMessage;
 
-  ProductsError({required this.errMessage});
+  ProductsFailuer({required this.errMessage});
 }
