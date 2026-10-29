@@ -52,23 +52,28 @@ class ProductModel {
   }
 
   factory ProductModel.fromMap(Map<String, dynamic> json) {
-    return ProductModel(
-      avgRating: getAvgRating(json['reviews']),
-      name: json['name'],
-      code: json['code'],
-      description: json['description'],
-      price: json['price'],
-      imageUrl: json['imageUrl'] as String?,
-      isFeatured: json['isFeatured'],
-      isOrganic: json['isOrganic'],
-      expirationsMonths: json['expirationsMonths'],
-      numberOfCalories: json['numberOfCalories'],
-      unitAmount: json['unitAmount'],
-      reviews: json['reviews'] != null
-          ? List<ReviewModel>.from(
-              json['reviews'].map((e) => ReviewModel.fromMap(e)),
+    final reviews = (json['reviews'] as List?)
+            ?.map(
+              (e) => ReviewModel.fromMap(
+                Map<String, dynamic>.from(e as Map),
+              ),
             )
-          : [],
+            .toList() ??
+        <ReviewModel>[];
+
+    return ProductModel(
+      avgRating: getAvgRating(reviews.map((e) => e.toEntity()).toList()),
+      name: json['name'] as String,
+      code: json['code'] as String,
+      description: json['description'] as String,
+      price: json['price'] as num,
+      imageUrl: json['imageUrl'] as String?,
+      isFeatured: json['isFeatured'] as bool? ?? false,
+      isOrganic: json['isOrganic'] as bool? ?? false,
+      expirationsMonths: (json['expirationsMonths'] as num?)?.toInt() ?? 0,
+      numberOfCalories: (json['numberOfCalories'] as num?)?.toInt() ?? 0,
+      unitAmount: (json['unitAmount'] as num?)?.toInt() ?? 1,
+      reviews: reviews,
       sellingCount: json['sellingCount'] as num? ?? 0,
     );
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_hub/core/entities/product_entity.dart';
 import 'package:fruits_hub/core/utils/app_colors.dart';
-import 'package:fruits_hub/core/utils/app_images.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 
 class FruitItem extends StatelessWidget {
@@ -28,11 +27,21 @@ final ProductEntity productEntity;
             child: Column(
               children: [
                 SizedBox(height: 20),
-                Image.asset(Assets.imagesWatermelonTest),
+                if (productEntity.imageUrl != null &&
+                    productEntity.imageUrl!.isNotEmpty)
+                  Flexible(
+                    child: Image.network(
+                      productEntity.imageUrl!,
+                      errorBuilder: (context, error, stackTrace) =>
+                          const _FruitImagePlaceholder(),
+                    ),
+                  )
+                else
+                  const _FruitImagePlaceholder(),
                 SizedBox(height: 24),
                 ListTile(
                   title: Text(
-                    'بطيخ',
+                    productEntity.name,
                     style: AppStyles.semiBold16,
                     textAlign: .right,
                   ),
@@ -40,7 +49,7 @@ final ProductEntity productEntity;
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: '30 ليرة',
+                          text: '${productEntity.price} ليرة',
                           style: AppStyles.bold13.copyWith(
                             color: AppColors.secondaryColor,
                           ),
@@ -76,6 +85,19 @@ final ProductEntity productEntity;
           ),
         ],
       ),
+    );
+  }
+}
+
+class _FruitImagePlaceholder extends StatelessWidget {
+  const _FruitImagePlaceholder();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Icon(
+      Icons.image_not_supported_outlined,
+      size: 80,
+      color: AppColors.lightSecondaryColor,
     );
   }
 }

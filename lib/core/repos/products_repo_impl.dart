@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:fruits_hub/core/entities/product_entity.dart';
 import 'package:fruits_hub/core/errors/failure.dart';
@@ -30,7 +32,8 @@ class ProductsRepoImpl extends ProductsRepo {
           .toList();
 
       return right(products);
-    } catch (e) {
+    } catch (e, stackTrace) {
+      log('getBestSellingProducts failed', error: e, stackTrace: stackTrace);
       return left(ServerFailure(errMessage: 'تعذر جلب المنتجات'));
     }
   }
@@ -47,7 +50,8 @@ class ProductsRepoImpl extends ProductsRepo {
           .toList();
 
       return right(products);
-    } catch (e) {
+    } catch (e, stackTrace) {
+      log('getProducts failed', error: e, stackTrace: stackTrace);
       return left(ServerFailure(errMessage: 'تعذر جلب المنتجات'));
     }
   }
