@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:fruits_hub/core/entities/product_entity.dart';
 import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
+import 'package:fruits_hub/core/widgets/custom_network_image.dart';
 
 class FruitItem extends StatelessWidget {
   const FruitItem({super.key, required this.productEntity});
-final ProductEntity productEntity;
+  final ProductEntity productEntity;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,18 +28,15 @@ final ProductEntity productEntity;
             child: Column(
               children: [
                 SizedBox(height: 20),
-                if (productEntity.imageUrl != null &&
-                    productEntity.imageUrl!.isNotEmpty)
-                  Flexible(
-                    child: Image.network(
-                      productEntity.imageUrl!,
-                      errorBuilder: (context, error, stackTrace) =>
-                          const _FruitImagePlaceholder(),
-                    ),
-                  )
-                else
-                  const _FruitImagePlaceholder(),
-                SizedBox(height: 24),
+                productEntity.imageUrl != null
+                    ? Flexible(
+                        child: CustomNetworkImage(
+                          imageUrl: productEntity.imageUrl!,
+                        ),
+                      )
+                    : Container(color: Colors.grey, height: 100, width: 100),
+
+                const SizedBox(height: 24),
                 ListTile(
                   title: Text(
                     productEntity.name,
@@ -85,19 +83,6 @@ final ProductEntity productEntity;
           ),
         ],
       ),
-    );
-  }
-}
-
-class _FruitImagePlaceholder extends StatelessWidget {
-  const _FruitImagePlaceholder();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Icon(
-      Icons.image_not_supported_outlined,
-      size: 80,
-      color: AppColors.lightSecondaryColor,
     );
   }
 }
