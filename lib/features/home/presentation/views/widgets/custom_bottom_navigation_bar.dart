@@ -2,22 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruits_hub/core/utils/app_images.dart';
 
-class CustomBottomNavigationBar extends StatefulWidget {
-  final void Function(int index)? onPressed;
+class CustomBottomNavigationBar extends StatelessWidget {
+  final int currentIndex;
+  final ValueChanged<int> onPressed;
 
   const CustomBottomNavigationBar({
     super.key,
-    this.onPressed,
+    required this.currentIndex,
+    required this.onPressed,
   });
-
-  @override
-  State<CustomBottomNavigationBar> createState() =>
-      _CustomBottomNavigationBarState();
-}
-
-class _CustomBottomNavigationBarState
-    extends State<CustomBottomNavigationBar> {
-  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -74,14 +67,7 @@ class _CustomBottomNavigationBarState
     final bool isSelected = currentIndex == index;
 
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          currentIndex = index;
-        });
-
-        // استدعاء onPressed الذي يأتي من الخارج
-        widget.onPressed?.call(index);
-      },
+      onTap: () => onPressed(index),
       child: isSelected
           ? Container(
               padding: EdgeInsets.only(
@@ -104,17 +90,13 @@ class _CustomBottomNavigationBarState
                       color: Color(0xff087443),
                       shape: BoxShape.circle,
                     ),
-                    child: Center(
-                      child: SvgPicture.asset(
-                        activeIconPath,
-                        width: 20,
-                        height: 20,
-                        colorFilter: const ColorFilter.mode(
-                          Colors.white,
-                          BlendMode.srcIn,
-                        ),
-                        fit: BoxFit.contain,
+                    child: SvgPicture.asset(
+                      activeIconPath,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white,
+                        BlendMode.srcIn,
                       ),
+                      fit: BoxFit.contain,
                     ),
                   ),
                   if (label.isNotEmpty) ...[
@@ -150,4 +132,3 @@ class _CustomBottomNavigationBarState
     );
   }
 }
-
