@@ -21,27 +21,36 @@ class FruitItem extends StatelessWidget {
             top: 0,
             child: IconButton(
               onPressed: () {},
-              icon: Icon(Icons.favorite_outline),
+              icon: const Icon(Icons.favorite_outline),
             ),
           ),
           Positioned.fill(
             child: Column(
               children: [
-                SizedBox(height: 20),
-                productEntity.imageUrl != null
-                    ? Flexible(
-                        child: CustomNetworkImage(
-                          imageUrl: productEntity.imageUrl!,
-                        ),
-                      )
-                    : Container(color: Colors.grey, height: 100, width: 100),
-
-                const SizedBox(height: 24),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: productEntity.imageUrl != null
+                        ? CustomNetworkImage(
+                            imageUrl: productEntity.imageUrl!,
+                          )
+                        : const ColoredBox(color: Colors.grey),
+                  ),
+                ),
+                const SizedBox(height: 8),
                 ListTile(
+                  dense: true,
+                  contentPadding: const EdgeInsetsDirectional.only(
+                    start: 16,
+                    end: 8,
+                  ),
                   title: Text(
                     productEntity.name,
                     style: AppStyles.semiBold16,
-                    textAlign: .right,
+                    textAlign: TextAlign.right,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   subtitle: Text.rich(
                     TextSpan(
@@ -72,10 +81,12 @@ class FruitItem extends StatelessWidget {
                         ),
                       ],
                     ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   trailing: const CircleAvatar(
                     backgroundColor: AppColors.primaryColor,
-                    child: Icon((Icons.add), color: Colors.white),
+                    child: Icon(Icons.add, color: Colors.white),
                   ),
                 ),
               ],

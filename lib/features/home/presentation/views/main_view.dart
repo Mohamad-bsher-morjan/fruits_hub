@@ -30,10 +30,7 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: IndexedStack(
-          index: currentViewIndex,
-          children: views,
-        ),
+        child: IndexedStack(index: currentViewIndex, children: views),
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: currentViewIndex,
