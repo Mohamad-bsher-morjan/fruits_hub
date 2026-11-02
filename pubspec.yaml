@@ -47,7 +47,7 @@ dependencies:
   meta: ^1.19.0
   modal_progress_hud_nsn: ^0.5.1
   shared_preferences: ^2.5.5
-  flutter_svg: ^2.2.0
+  flutter_svg: ^2.3.0
   flutter_svg_provider: ^1.0.7
   skeletonizer: ^3.0.0
   svg_flutter: ^0.0.1

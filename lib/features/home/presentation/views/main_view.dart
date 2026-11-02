@@ -19,18 +19,21 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   int currentViewIndex = 0;
 
-  late final List<Widget> views = [
-    const HomeView(),
-    const ProductsView(),
-    const CartView(),
-    const ProfileView(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: IndexedStack(index: currentViewIndex, children: views),
+        child: IndexedStack(
+          index: currentViewIndex,
+          // Built inside build() (not stored in a `late final` field) so that
+          // adding/removing/reordering tabs is picked up by hot reload.
+          children: const [
+            HomeView(),
+            ProductsView(),
+            CartView(),
+            ProfileView(),
+          ],
+        ),
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: currentViewIndex,
