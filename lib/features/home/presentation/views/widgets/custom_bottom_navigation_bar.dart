@@ -45,7 +45,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             index: 2,
             activeIconPath: Assets.imagesVuesaxBoldShoppingCart,
             inactiveIconPath: Assets.imagesVuesaxOutlineShoppingCart,
-            label: '',
+            label: 'سلة التسوق',
           ),
           _buildItem(
             index: 3,
