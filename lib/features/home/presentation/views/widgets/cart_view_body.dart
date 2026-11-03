@@ -47,7 +47,8 @@ class CartViewBody extends StatelessWidget {
           child: CustomButton(
             backgroundColor: AppColors.primaryColor,
             onPressed: () {},
-            title: 'pay money',
+            title:
+                'ادفع ${context.watch<CartCubit>().cartEntity.calculateTotalPrice()} ليرة',
           ),
         ),
       ],
