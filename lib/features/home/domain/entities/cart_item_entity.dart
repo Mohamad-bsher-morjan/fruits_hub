@@ -6,18 +6,19 @@ class CartItemEntity {
 
   CartItemEntity({required this.productEntity, this.count = 0});
 
-  num calculateTotalPrice(){
-
+  num calculateTotalPrice() {
     return productEntity.price * count;
   }
-  num calculateTotalWeight(){
-    return productEntity.unitAmount *count ;
+
+  num calculateTotalWeight() {
+    return productEntity.unitAmount * count;
   }
 
-  void increaseCount(){
+  void increaseCount() {
     count++;
   }
-  void decreaseCount(){
+
+  void decreaseCount() {
     count--;
   }
 }
