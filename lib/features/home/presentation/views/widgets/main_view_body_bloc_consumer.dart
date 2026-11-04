@@ -16,6 +16,9 @@ class MainViewBodyBlocConsumer extends StatelessWidget {
         if (state is CartItemAdded) {
           CustomSnackBar.showSuccess(context, message: 'تمت العملية بنجاح');
         }
+        if (state is CartItemRemoved) {
+          CustomSnackBar.showSuccess(context, message: 'تم حذف العنصر بنجاح');
+        }
       },
       child: MainViewBody(currentViewIndex: currentViewIndex),
     );
