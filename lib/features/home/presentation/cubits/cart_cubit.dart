@@ -1,12 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:fruits_hub/core/entities/product_entity.dart';
 import 'package:fruits_hub/features/home/domain/entities/cart_entity.dart';
+import 'package:fruits_hub/features/home/domain/entities/cart_item_entity.dart';
 import 'package:meta/meta.dart';
 
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
-  CartCubit() : super(CartItemInitial());
+  CartCubit() : super(CartInitial());
 
   CartEntity cartEntity = CartEntity(cartItems: []);
 
@@ -21,5 +22,10 @@ class CartCubit extends Cubit<CartState> {
       cartEntity.addCartItem(cartItem);
     }
     emit(CartItemAdded());
+  }
+
+  void deleteCartItem(CartItemEntity cartItem) {
+    cartEntity.removeCarItem(cartItem);
+    emit(CartItemRemoved());
   }
 }
