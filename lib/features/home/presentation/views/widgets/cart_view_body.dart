@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/widgets/build_app_bar.dart';
-import 'package:fruits_hub/core/widgets/custom_button.dart';
 import 'package:fruits_hub/features/home/presentation/cubits/cart_cubit/cart_cubit.dart';
 import 'package:fruits_hub/features/home/presentation/views/widgets/cart_header.dart';
 import 'package:fruits_hub/features/home/presentation/views/widgets/cart_items_list.dart';
+import 'package:fruits_hub/features/home/presentation/views/widgets/custom_cart_button.dart';
 
 class CartViewBody extends StatelessWidget {
   const CartViewBody({super.key});
@@ -33,7 +32,7 @@ class CartViewBody extends StatelessWidget {
                   : CustomDivider(),
             ),
             CartItemsList(
-              cartItem: context.read<CartCubit>().cartEntity.cartItems,
+              cartItem: context.watch<CartCubit>().cartEntity.cartItems,
             ),
             SliverToBoxAdapter(
               child: context.read<CartCubit>().cartEntity.cartItems.isEmpty
@@ -46,14 +45,11 @@ class CartViewBody extends StatelessWidget {
           right: 16,
           left: 16,
           bottom: MediaQuery.sizeOf(context).height * .05,
-          child: CustomButton(
-            backgroundColor: AppColors.primaryColor,
-            onPressed: () {},
-            title:
-                'ادفع ${context.watch<CartCubit>().cartEntity.calculateTotalPrice()} ليرة',
-          ),
+          child: CustomCartButton(),
         ),
       ],
     );
   }
 }
+
+
