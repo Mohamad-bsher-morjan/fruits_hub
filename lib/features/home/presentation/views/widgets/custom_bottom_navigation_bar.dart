@@ -65,70 +65,108 @@ class CustomBottomNavigationBar extends StatelessWidget {
     required String label,
   }) {
     final bool isSelected = currentIndex == index;
+    const duration = Duration(milliseconds: 350);
+    const curve = Curves.easeOutCubic;
 
     return GestureDetector(
       onTap: () => onPressed(index),
-      child: isSelected
-          ? Container(
-              padding: EdgeInsets.only(
-                left: label.isEmpty ? 10 : 8,
-                right: label.isEmpty ? 10 : 4,
-              ),
-              decoration: BoxDecoration(
-                color: const Color(0xfff1f4f2),
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                textDirection: TextDirection.rtl,
-                children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    padding: const EdgeInsets.all(9),
-                    decoration: const BoxDecoration(
-                      color: Color(0xff087443),
-                      shape: BoxShape.circle,
-                    ),
-                    child: SvgPicture.asset(
-                      activeIconPath,
-                      colorFilter: const ColorFilter.mode(
-                        Colors.white,
-                        BlendMode.srcIn,
-                      ),
-                      fit: BoxFit.contain,
-                    ),
+      behavior: HitTestBehavior.opaque,
+      child: AnimatedContainer(
+        duration: duration,
+        curve: curve,
+        padding: EdgeInsets.only(
+          left: isSelected ? 6 : 10,
+          right: isSelected ? 4 : 10,
+        ),
+        decoration: BoxDecoration(
+          color: isSelected ? const Color(0xfff1f4f2) : Colors.transparent,
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: const Color(0xff087443).withValues(alpha: 0.18),
+                    blurRadius: 14,
+                    offset: const Offset(0, 4),
                   ),
-                  if (label.isNotEmpty) ...[
-                    const SizedBox(width: 6),
-                    Text(
-                      label,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff176b4d),
+                ]
+              : const [],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          textDirection: TextDirection.rtl,
+          children: [
+            AnimatedContainer(
+              duration: duration,
+              curve: curve,
+              width: isSelected ? 40 : 34,
+              height: isSelected ? 40 : 34,
+              padding: EdgeInsets.all(isSelected ? 9 : 7),
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? const Color(0xff087443)
+                    : Colors.transparent,
+                shape: BoxShape.circle,
+              ),
+              child: AnimatedSwitcher(
+                duration: duration,
+                switchInCurve: Curves.easeOut,
+                switchOutCurve: Curves.easeIn,
+                transitionBuilder: (child, animation) => FadeTransition(
+                  opacity: animation,
+                  child: ScaleTransition(
+                    scale: Tween<double>(begin: 0.7, end: 1).animate(
+                      CurvedAnimation(
+                        parent: animation,
+                        curve: Curves.easeOutBack,
                       ),
                     ),
-                  ],
-                ],
-              ),
-            )
-          : SizedBox(
-              width: 45,
-              height: 50,
-              child: Center(
+                    child: child,
+                  ),
+                ),
                 child: SvgPicture.asset(
-                  inactiveIconPath,
-                  width: 22,
-                  height: 22,
-                  colorFilter: const ColorFilter.mode(
-                    Colors.grey,
+                  isSelected ? activeIconPath : inactiveIconPath,
+                  key: ValueKey<bool>(isSelected),
+                  colorFilter: ColorFilter.mode(
+                    isSelected ? Colors.white : Colors.grey,
                     BlendMode.srcIn,
                   ),
                   fit: BoxFit.contain,
                 ),
               ),
             ),
+            AnimatedSize(
+              duration: duration,
+              curve: curve,
+              alignment: Alignment.centerRight,
+              child: isSelected && label.isNotEmpty
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 6),
+                      child: TweenAnimationBuilder<double>(
+                        tween: Tween<double>(begin: 0, end: 1),
+                        duration: duration,
+                        curve: curve,
+                        builder: (context, value, child) => Opacity(
+                          opacity: value,
+                          child: Transform.translate(
+                            offset: Offset(8 * (1 - value), 0),
+                            child: child,
+                          ),
+                        ),
+                        child: Text(
+                          label,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff176b4d),
+                          ),
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
