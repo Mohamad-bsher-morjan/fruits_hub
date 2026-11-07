@@ -9,10 +9,13 @@ final Widget child;
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: .start,
       children: [
+        
         Text('$title:', style: AppStyles.bold13),
         SizedBox(height: 8),
         Container(
+          padding: .symmetric(vertical: 16,horizontal: 8),
           decoration: AppDecorations.greyBoxDecoration,
           child: child,
         )

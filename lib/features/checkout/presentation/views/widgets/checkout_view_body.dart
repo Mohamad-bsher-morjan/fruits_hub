@@ -12,17 +12,17 @@ class CheckoutViewBody extends StatefulWidget {
 }
 
 class _CheckoutViewBodyState extends State<CheckoutViewBody> {
-  late PageController pageContoller;
+  late PageController pageController;
 
   @override
   void initState() {
-    pageContoller = PageController();
+    pageController = PageController();
     super.initState();
   }
 
   @override
   void dispose() {
-    pageContoller.dispose();
+    pageController.dispose();
     super.dispose();
   }
 
@@ -34,13 +34,13 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         children: [
           SizedBox(height: 20),
           CheckoutSteps(),
-          Expanded(child: CheckoutStepsPageView(pageContoller: pageContoller)),
+          Expanded(child: CheckoutStepsPageView(pageController: pageController)),
           CustomButton(
             backgroundColor: AppColors.primaryColor,
             title: 'التالي',
             onPressed: () {
-              pageContoller.animateTo(
-                2,
+              pageController.nextPage(
+              
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.bounceIn,
               );

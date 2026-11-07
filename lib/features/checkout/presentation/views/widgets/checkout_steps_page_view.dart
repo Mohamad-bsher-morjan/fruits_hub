@@ -4,16 +4,16 @@ import 'package:fruits_hub/features/checkout/presentation/views/widgets/payment_
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/shipping_section.dart';
 
 class CheckoutStepsPageView extends StatelessWidget {
-  const CheckoutStepsPageView({super.key, required this.pageContoller});
+  const CheckoutStepsPageView({super.key, required this.pageController});
 
-  final PageController pageContoller;
+  final PageController pageController;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: PageView.builder(
-        controller: pageContoller,
+        controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: getPages().length,
         itemBuilder: (context, index) {
@@ -24,6 +24,10 @@ class CheckoutStepsPageView extends StatelessWidget {
   }
 
   List<Widget> getPages() {
-    return [const ShippingSection(),const AddressInputSection(),const PaymentSection(),];
+    return [
+      const ShippingSection(),
+      const AddressInputSection(),
+      const PaymentSection(),
+    ];
   }
 }
