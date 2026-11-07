@@ -3,7 +3,6 @@ import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/widgets/custom_button.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/checkout_steps.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/checkout_steps_page_view.dart';
-import 'package:fruits_hub/features/checkout/presentation/views/widgets/shipping_section.dart';
 
 class CheckoutViewBody extends StatefulWidget {
   const CheckoutViewBody({super.key});
@@ -39,7 +38,12 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
           CustomButton(
             backgroundColor: AppColors.primaryColor,
             title: 'التالي',
-            onPressed: () {},
+            onPressed: () {
+              pageContoller.nextPage(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeIn,
+              );
+            },
           ),
           SizedBox(height: 32),
         ],
@@ -47,7 +51,4 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
     );
   }
 
-  List<Widget> getPages() {
-    return [ShippingSection(), SizedBox(), SizedBox(), SizedBox()];
-  }
 }
