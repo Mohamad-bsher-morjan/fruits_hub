@@ -39,9 +39,10 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
             backgroundColor: AppColors.primaryColor,
             title: 'التالي',
             onPressed: () {
-              pageContoller.nextPage(
+              pageContoller.animateTo(
+                2,
                 duration: const Duration(milliseconds: 300),
-                curve: Curves.easeIn,
+                curve: Curves.bounceIn,
               );
             },
           ),
@@ -50,5 +51,4 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
       ),
     );
   }
-
 }

@@ -9,8 +9,9 @@ class CheckoutSteps extends StatelessWidget {
     return Row(
       children: List.generate(getSteps().length, (index) {
         return Expanded(
-          child: StepItem(isActive: false,
-            index: (index+1).toString(),
+          child: StepItem(
+            isActive: false,
+            index: (index + 1).toString(),
             text: getSteps()[index],
           ),
         );
@@ -19,6 +20,6 @@ class CheckoutSteps extends StatelessWidget {
   }
 
   List<String> getSteps() {
-    return ['الشحن', 'العنوان', 'الدفع', 'المراجعة'];
+    return ['الشحن', 'العنوان', 'الدفع'];
   }
 }
