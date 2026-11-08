@@ -17,6 +17,11 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
   @override
   void initState() {
     pageController = PageController();
+    pageController.addListener(() {
+      setState(() {
+        currnetPageIndex = pageController.page!.toInt();
+      });
+    });
     super.initState();
   }
 
@@ -26,6 +31,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
     super.dispose();
   }
 
+  int currnetPageIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,14 +39,16 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
       child: Column(
         children: [
           SizedBox(height: 20),
-          CheckoutSteps(),
-          Expanded(child: CheckoutStepsPageView(pageController: pageController)),
+          CheckoutSteps(currentPageIndex: currnetPageIndex),
+          Expanded(
+            child: CheckoutStepsPageView(pageController: pageController),
+          ),
           CustomButton(
             backgroundColor: AppColors.primaryColor,
-            title: 'التالي',
+            title: getNextButtonText(currnetPageIndex),
             onPressed: () {
-              pageController.nextPage(
-              
+              pageController.animateToPage(
+                currnetPageIndex + 1,
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.bounceIn,
               );
@@ -50,5 +58,18 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         ],
       ),
     );
+  }
+
+  String getNextButtonText(int currentPageIndex) {
+    switch (currentPageIndex) {
+      case 0:
+        return 'التالي';
+      case 1:
+        return 'التالي';
+      case 2:
+        return 'ادفع باستخدام PayPal';
+      default:
+        return 'التالي';
+    }
   }
 }

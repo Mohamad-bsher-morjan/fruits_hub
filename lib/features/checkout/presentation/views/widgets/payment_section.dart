@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/order_summry_widget.dart';
+import 'package:fruits_hub/features/checkout/presentation/views/widgets/shipping_address_widget.dart';
 
 class PaymentSection extends StatelessWidget {
   const PaymentSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [SizedBox(height: 24), OrderSummryWidget()]);
+    return Column(
+      children: [
+        SizedBox(height: 24),
+        OrderSummryWidget(),
+        const SizedBox(height: 16),
+        ShippingAddressWidget(),
+      ],
+    );
   }
 }
