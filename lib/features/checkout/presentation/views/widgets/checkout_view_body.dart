@@ -16,6 +16,9 @@ class CheckoutViewBody extends StatefulWidget {
 
 class _CheckoutViewBodyState extends State<CheckoutViewBody> {
   late PageController pageController;
+  ValueNotifier<AutovalidateMode> valueNotifier = ValueNotifier(
+    AutovalidateMode.disabled,
+  );
 
   @override
   void initState() {
@@ -31,10 +34,12 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
   @override
   void dispose() {
     pageController.dispose();
+    valueNotifier.dispose();
     super.dispose();
   }
 
   int currnetPageIndex = 0;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -47,23 +52,20 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
             pageController: pageController,
           ),
           Expanded(
-            child: CheckoutStepsPageView(pageController: pageController),
+            child: CheckoutStepsPageView(
+              valueListenable: valueNotifier,
+              pageController: pageController,
+              formKey: _formKey,
+            ),
           ),
           CustomButton(
             backgroundColor: AppColors.primaryColor,
             title: getNextButtonText(currnetPageIndex),
             onPressed: () {
-              if (context.read<OrderEntity>().payWithCash != null) {
-                pageController.animateToPage(
-                  currnetPageIndex + 1,
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.bounceIn,
-                );
-              } else {
-                CustomSnackBar.showAlert(
-                  context,
-                  message: 'يرجى تحديد طريقة الدفع',
-                );
+              if (currnetPageIndex == 0) {
+                _handleShippingSectionValidation(context);
+              } else if (currnetPageIndex == 1) {
+                _handleAddressValidation();
               }
             },
           ),
@@ -71,6 +73,31 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         ],
       ),
     );
+  }
+
+  void _handleShippingSectionValidation(BuildContext context) {
+    if (context.read<OrderEntity>().payWithCash != null) {
+      pageController.animateToPage(
+        currnetPageIndex + 1,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.bounceIn,
+      );
+    } else {
+      CustomSnackBar.showAlert(context, message: 'يرجى تحديد طريقة الدفع');
+    }
+  }
+
+  void _handleAddressValidation() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      pageController.animateToPage(
+        currnetPageIndex + 1,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.bounceIn,
+      );
+    } else {
+      valueNotifier.value = AutovalidateMode.always;
+    }
   }
 
   String getNextButtonText(int currentPageIndex) {
