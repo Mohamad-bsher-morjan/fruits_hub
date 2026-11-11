@@ -22,7 +22,7 @@ class AddressInputSection extends StatelessWidget {
               SizedBox(height: 24),
               CustomTextFormField(
                 onSaved: (p0) {
-                  context.read<OrderEntity>().shippingAddressEntity!.name = p0!;
+                  context.read<OrderEntity>().shippingAddressEntity.name = p0!;
                 },
                 hintText: 'الاسم الكامل',
                 textInputType: TextInputType.text,
@@ -30,7 +30,7 @@ class AddressInputSection extends StatelessWidget {
               SizedBox(height: 16),
               CustomTextFormField(
                 onSaved: (p1) {
-                  context.read<OrderEntity>().shippingAddressEntity!.email =
+                  context.read<OrderEntity>().shippingAddressEntity.email =
                       p1!;
                 },
                 hintText: 'البريد الإلكتروني',
@@ -39,7 +39,7 @@ class AddressInputSection extends StatelessWidget {
               SizedBox(height: 16),
               CustomTextFormField(
                 onSaved: (p2) {
-                  context.read<OrderEntity>().shippingAddressEntity!.address =
+                  context.read<OrderEntity>().shippingAddressEntity.address =
                       p2!;
                 },
                 hintText: ' العنوان',
@@ -48,7 +48,7 @@ class AddressInputSection extends StatelessWidget {
               SizedBox(height: 16),
               CustomTextFormField(
                 onSaved: (p3) {
-                  context.read<OrderEntity>().shippingAddressEntity!.city = p3!;
+                  context.read<OrderEntity>().shippingAddressEntity.city = p3!;
                 },
                 hintText: 'المدينة',
                 textInputType: TextInputType.text,
@@ -56,7 +56,7 @@ class AddressInputSection extends StatelessWidget {
               SizedBox(height: 16),
               CustomTextFormField(
                 onSaved: (p4) {
-                  context.read<OrderEntity>().shippingAddressEntity!.phone =
+                  context.read<OrderEntity>().shippingAddressEntity.phone =
                       p4!;
                 },
                 hintText: ' رقم الهاتف',

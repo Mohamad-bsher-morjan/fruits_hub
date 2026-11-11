@@ -12,7 +12,6 @@ class ShippingSection extends StatefulWidget {
 
 class _ShippingSectionState extends State<ShippingSection>
     with AutomaticKeepAliveClientMixin {
-  int selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -24,11 +23,9 @@ class _ShippingSectionState extends State<ShippingSection>
           title: 'الدفع عند الاستلام',
           subTitle: 'التسليم من المكان',
           price: (orderEntity.cartEntity.calculateTotalPrice() + 40).toString(),
-          isSelected: selectedIndex == 0,
+          isSelected: orderEntity.payWithCash==true,
           onTap: () {
-            selectedIndex = 0;
-            setState(() {});
-            orderEntity.payWithCash = true;
+          setState(() => orderEntity.payWithCash = true);
           },
         ),
 
@@ -37,11 +34,9 @@ class _ShippingSectionState extends State<ShippingSection>
           title: 'الدفع أونلاين',
           subTitle: 'يرجى تحديد طريقة الدفع',
           price: orderEntity.cartEntity.calculateTotalPrice().toString(),
-          isSelected: selectedIndex == 1,
+          isSelected: orderEntity.payWithCash == false,
           onTap: () {
-            selectedIndex = 1;
-            setState(() {});
-            orderEntity.payWithCash = false;
+            setState(() => orderEntity.payWithCash = false);
           },
         ),
       ],

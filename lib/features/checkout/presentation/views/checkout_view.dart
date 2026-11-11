@@ -15,8 +15,8 @@ class CheckoutView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context, 'الشحن', showNotification: false),
-      body: Provider.value(
-        value: OrderEntity(
+      body: Provider<OrderEntity>(
+        create: (context) => OrderEntity(
           cartEntity: cartEntity,
           shippingAddressEntity: ShippingAddressEntity(),
         ),
