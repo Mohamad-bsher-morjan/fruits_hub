@@ -30,7 +30,7 @@ final GlobalKey<FormState> formKey;
     return [
       const ShippingSection(),
       AddressInputSection(formKey: formKey,valueListenable: valueListenable,),
-      const PaymentSection(),
+       PaymentSection(pageController: pageController,),
     ];
   }
 }
