@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/widgets/custom_button.dart';
+import 'package:fruits_hub/core/widgets/custom_snack_bar.dart';
+import 'package:fruits_hub/features/checkout/domain/entities/order_entity.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/checkout_steps.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/checkout_steps_page_view.dart';
 
@@ -50,11 +53,18 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
             backgroundColor: AppColors.primaryColor,
             title: getNextButtonText(currnetPageIndex),
             onPressed: () {
-              pageController.animateToPage(
-                currnetPageIndex + 1,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.bounceIn,
-              );
+              if (context.read<OrderEntity>().payWithCash != null) {
+                pageController.animateToPage(
+                  currnetPageIndex + 1,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.bounceIn,
+                );
+              } else {
+                CustomSnackBar.showAlert(
+                  context,
+                  message: 'يرجى تحديد طريقة الدفع',
+                );
+              }
             },
           ),
           SizedBox(height: 32),
