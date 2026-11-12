@@ -7,13 +7,13 @@ import 'package:fruits_hub/features/checkout/data/models/order_model.dart';
 import 'package:fruits_hub/features/checkout/domain/entities/order_entity.dart';
 
 class OrdersRepoImpl extends OrdersRepo {
-  final DatabaseService fireStoreService; // مشان تقدر تعمل  switch للخدمة
+  final DatabaseService databaseService; // مشان تقدر تعمل  switch للخدمة
 
-  OrdersRepoImpl({required this.fireStoreService});
+  OrdersRepoImpl({required this.databaseService});
   @override
   Future<Either<Failure, void>> addOrders({required OrderEntity order}) async {
     try {
-      await fireStoreService.addData(
+      await databaseService.addData(
         BackendEndpoint.addOrders,
         OrderModel.fromEntity(order).toMap(),
         null
