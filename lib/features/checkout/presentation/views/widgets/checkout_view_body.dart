@@ -4,6 +4,7 @@ import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/widgets/custom_button.dart';
 import 'package:fruits_hub/core/widgets/custom_snack_bar.dart';
 import 'package:fruits_hub/features/checkout/domain/entities/order_entity.dart';
+import 'package:fruits_hub/features/checkout/presentation/cubits/add_order/add_order_cubit.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/checkout_steps.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/checkout_steps_page_view.dart';
 
@@ -67,6 +68,9 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
               } else if (currnetPageIndex == 1) {
                 _handleAddressValidation();
               }
+              else { 
+                var orderEntity= context.read<OrderEntity>(); 
+               context.read<AddOrderCubit>().addOrder(order:orderEntity);}
             },
           ),
           SizedBox(height: 32),
