@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/widgets/custom_button.dart';
 import 'package:fruits_hub/core/widgets/custom_snack_bar.dart';
 import 'package:fruits_hub/features/checkout/domain/entities/order_entity.dart';
-import 'package:fruits_hub/features/checkout/presentation/cubits/add_order/add_order_cubit.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/checkout_steps.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/checkout_steps_page_view.dart';
 
@@ -67,10 +67,11 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
                 _handleShippingSectionValidation(context);
               } else if (currnetPageIndex == 1) {
                 _handleAddressValidation();
+              } else {
+                _processPayment(context);
               }
-              else { 
-                var orderEntity= context.read<OrderEntity>(); 
-               context.read<AddOrderCubit>().addOrder(order:orderEntity);}
+              //   var orderEntity= context.read<OrderEntity>();
+              //  context.read<AddOrderCubit>().addOrder(order:orderEntity);}
             },
           ),
           SizedBox(height: 32),
@@ -115,5 +116,74 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
       default:
         return 'التالي';
     }
+  }
+
+  void _processPayment(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) => PaypalCheckoutView(
+          sandboxMode: true,
+          clientId: "",
+          secretKey: "",
+          transactions: const [
+            {
+              "amount": {
+                "total": '70',
+                "currency": "USD",
+                "details": {
+                  "subtotal": '70',
+                  "shipping": '0',
+                  "shipping_discount": 0,
+                },
+              },
+              "description": "The payment transaction description.",
+              // "payment_options": {
+              //   "allowed_payment_method":
+              //       "INSTANT_FUNDING_SOURCE"
+              // },
+              "item_list": {
+                "items": [
+                  {
+                    "name": "Apple",
+                    "quantity": 4,
+                    "price": '5',
+                    "currency": "USD",
+                  },
+                  {
+                    "name": "Pineapple",
+                    "quantity": 5,
+                    "price": '10',
+                    "currency": "USD",
+                  },
+                ],
+
+                // shipping address is not required though
+                //   "shipping_address": {
+                //     "recipient_name": "tharwat",
+                //     "line1": "Alexandria",
+                //     "line2": "",
+                //     "city": "Alexandria",
+                //     "country_code": "EG",
+                //     "postal_code": "21505",
+                //     "phone": "+00000000",
+                //     "state": "Alexandria"
+                //  },
+              },
+            },
+          ],
+          note: "Contact us for any questions on your order.",
+          onSuccess: (Map params) async {
+            print("onSuccess: $params");
+          },
+          onError: (error) {
+            print("onError: $error");
+            Navigator.pop(context);
+          },
+          onCancel: () {
+            print('cancelled:');
+          },
+        ),
+      ),
+    );
   }
 }
