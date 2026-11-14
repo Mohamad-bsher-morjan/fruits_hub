@@ -4,7 +4,7 @@ import 'package:fruits_hub/features/checkout/presentation/views/widgets/shipping
 
 class PaymentSection extends StatelessWidget {
   const PaymentSection({super.key, required this.pageController});
-final PageController pageController;
+  final PageController pageController;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -12,7 +12,7 @@ final PageController pageController;
         SizedBox(height: 24),
         OrderSummryWidget(),
         const SizedBox(height: 16),
-        ShippingAddressWidget(pageController: pageController,),
+        ShippingAddressWidget(pageController: pageController),
       ],
     );
   }

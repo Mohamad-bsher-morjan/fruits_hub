@@ -34,9 +34,7 @@ class FruitItem extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: productEntity.imageUrl != null
-                        ? CustomNetworkImage(
-                            imageUrl: productEntity.imageUrl!,
-                          )
+                        ? CustomNetworkImage(imageUrl: productEntity.imageUrl!)
                         : const ColoredBox(color: Colors.grey),
                   ),
                 ),

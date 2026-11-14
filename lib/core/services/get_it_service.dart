@@ -24,10 +24,9 @@ void setupGetit() {
 
   if (!getIt.isRegistered<OrdersRepo>()) {
     getIt.registerLazySingleton<OrdersRepo>(
-      () => OrdersRepoImpl(databaseService: getIt<DatabaseService>(),),
+      () => OrdersRepoImpl(databaseService: getIt<DatabaseService>()),
     );
   }
-
 
   if (!getIt.isRegistered<AuthRepo>()) {
     getIt.registerLazySingleton<AuthRepo>(
@@ -37,7 +36,6 @@ void setupGetit() {
       ),
     );
   }
-
 
   if (!getIt.isRegistered<ProductsRepo>()) {
     getIt.registerLazySingleton<ProductsRepo>(

@@ -16,7 +16,7 @@ class ProductsGridView extends StatelessWidget {
       ),
       itemCount: products.length,
       itemBuilder: (context, index) {
-        return FruitItem(productEntity: products[index],);
+        return FruitItem(productEntity: products[index]);
       },
     );
   }

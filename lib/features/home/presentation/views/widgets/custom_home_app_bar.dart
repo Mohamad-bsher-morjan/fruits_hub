@@ -21,5 +21,3 @@ class CustomHomeAppBar extends StatelessWidget {
     );
   }
 }
-
-

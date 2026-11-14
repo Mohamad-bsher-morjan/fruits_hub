@@ -1,9 +1,7 @@
 part of 'cart_item_cubit.dart';
 
-abstract class CartItemState  {
+abstract class CartItemState {
   const CartItemState();
-
-
 }
 
 final class CartItemInitial extends CartItemState {}

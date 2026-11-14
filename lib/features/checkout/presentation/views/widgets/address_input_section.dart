@@ -5,7 +5,11 @@ import 'package:fruits_hub/core/widgets/custom_text_field.dart';
 import 'package:fruits_hub/features/checkout/domain/entities/order_entity.dart';
 
 class AddressInputSection extends StatelessWidget {
-  const AddressInputSection({super.key, required this.formKey, required this.valueListenable});
+  const AddressInputSection({
+    super.key,
+    required this.formKey,
+    required this.valueListenable,
+  });
   final GlobalKey<FormState> formKey;
   final ValueListenable<AutovalidateMode> valueListenable;
 
@@ -30,8 +34,7 @@ class AddressInputSection extends StatelessWidget {
               SizedBox(height: 16),
               CustomTextFormField(
                 onSaved: (p1) {
-                  context.read<OrderEntity>().shippingAddressEntity.email =
-                      p1!;
+                  context.read<OrderEntity>().shippingAddressEntity.email = p1!;
                 },
                 hintText: 'البريد الإلكتروني',
                 textInputType: TextInputType.text,
@@ -56,8 +59,7 @@ class AddressInputSection extends StatelessWidget {
               SizedBox(height: 16),
               CustomTextFormField(
                 onSaved: (p4) {
-                  context.read<OrderEntity>().shippingAddressEntity.phone =
-                      p4!;
+                  context.read<OrderEntity>().shippingAddressEntity.phone = p4!;
                 },
                 hintText: ' رقم الهاتف',
                 textInputType: TextInputType.number,

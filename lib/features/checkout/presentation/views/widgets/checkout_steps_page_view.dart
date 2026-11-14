@@ -5,10 +5,15 @@ import 'package:fruits_hub/features/checkout/presentation/views/widgets/payment_
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/shipping_section.dart';
 
 class CheckoutStepsPageView extends StatelessWidget {
-  const CheckoutStepsPageView({super.key, required this.pageController, required this.formKey, required this.valueListenable});
+  const CheckoutStepsPageView({
+    super.key,
+    required this.pageController,
+    required this.formKey,
+    required this.valueListenable,
+  });
 
   final PageController pageController;
-final GlobalKey<FormState> formKey;
+  final GlobalKey<FormState> formKey;
   final ValueListenable<AutovalidateMode> valueListenable;
 
   @override
@@ -29,8 +34,8 @@ final GlobalKey<FormState> formKey;
   List<Widget> getPages() {
     return [
       const ShippingSection(),
-      AddressInputSection(formKey: formKey,valueListenable: valueListenable,),
-       PaymentSection(pageController: pageController,),
+      AddressInputSection(formKey: formKey, valueListenable: valueListenable),
+      PaymentSection(pageController: pageController),
     ];
   }
 }

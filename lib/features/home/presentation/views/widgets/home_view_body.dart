@@ -15,8 +15,7 @@ class HomeViewBody extends StatefulWidget {
 }
 
 class _HomeViewBodyState extends State<HomeViewBody> {
-
-@override
+  @override
   void initState() {
     context.read<ProductsCubit>().getBestSellingProducts();
     super.initState();
@@ -49,5 +48,3 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     );
   }
 }
-
-

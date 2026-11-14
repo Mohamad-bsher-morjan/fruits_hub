@@ -33,11 +33,7 @@ class _FruitItemSkeleton extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          const Positioned(
-            right: 8,
-            top: 8,
-            child: Bone.circle(size: 24),
-          ),
+          const Positioned(right: 8, top: 8, child: Bone.circle(size: 24)),
           Positioned.fill(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -45,11 +41,7 @@ class _FruitItemSkeleton extends StatelessWidget {
                 children: [
                   const Expanded(
                     child: Center(
-                      child: Bone(
-                        width: 96,
-                        height: 96,
-                        uniRadius: 48,
-                      ),
+                      child: Bone(width: 96, height: 96, uniRadius: 48),
                     ),
                   ),
                   const SizedBox(height: 12),

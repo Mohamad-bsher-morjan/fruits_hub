@@ -36,4 +36,3 @@ class _MainViewState extends State<MainView> {
     );
   }
 }
-

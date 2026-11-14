@@ -52,11 +52,10 @@ class ProductModel {
   }
 
   factory ProductModel.fromMap(Map<String, dynamic> json) {
-    final reviews = (json['reviews'] as List?)
+    final reviews =
+        (json['reviews'] as List?)
             ?.map(
-              (e) => ReviewModel.fromMap(
-                Map<String, dynamic>.from(e as Map),
-              ),
+              (e) => ReviewModel.fromMap(Map<String, dynamic>.from(e as Map)),
             )
             .toList() ??
         <ReviewModel>[];

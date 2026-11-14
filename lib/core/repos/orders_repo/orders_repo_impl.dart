@@ -16,7 +16,7 @@ class OrdersRepoImpl extends OrdersRepo {
       await databaseService.addData(
         BackendEndpoint.addOrders,
         OrderModel.fromEntity(order).toMap(),
-        null
+        null,
       );
     } on Exception catch (e) {
       return left(ServerFailure(errMessage: e.toString()));

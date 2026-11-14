@@ -26,13 +26,13 @@ class OrderProductModel {
       imageUrl: cartItemEntity.productEntity.imageUrl!,
     );
   }
-  Map<String, dynamic> toMap(){
-    return{'name':name,
-    'code':code,
-    'imageUrl': imageUrl,
-    'price': price,
-    'quantity':quantity
-
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'code': code,
+      'imageUrl': imageUrl,
+      'price': price,
+      'quantity': quantity,
     };
   }
 }

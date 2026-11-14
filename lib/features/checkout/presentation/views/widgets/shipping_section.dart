@@ -23,9 +23,9 @@ class _ShippingSectionState extends State<ShippingSection>
           title: 'الدفع عند الاستلام',
           subTitle: 'التسليم من المكان',
           price: (orderEntity.cartEntity.calculateTotalPrice() + 40).toString(),
-          isSelected: orderEntity.payWithCash==true,
+          isSelected: orderEntity.payWithCash == true,
           onTap: () {
-          setState(() => orderEntity.payWithCash = true);
+            setState(() => orderEntity.payWithCash = true);
           },
         ),
 

@@ -3,13 +3,14 @@ import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 
 class ShippingItem extends StatelessWidget {
-  const ShippingItem(
-      {super.key,
-      required this.title,
-      required this.subTitle,
-      required this.price,
-      required this.isSelected,
-      required this.onTap});
+  const ShippingItem({
+    super.key,
+    required this.title,
+    required this.subTitle,
+    required this.price,
+    required this.isSelected,
+    required this.onTap,
+  });
   final String title, subTitle, price;
   final bool isSelected;
   final VoidCallback onTap;
@@ -42,25 +43,19 @@ class ShippingItem extends StatelessWidget {
               isSelected
                   ? const ActiveShippingItemDot()
                   : const InActiveShippingItemDot(),
-              const SizedBox(
-                width: 10,
-              ),
+              const SizedBox(width: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: AppStyles.semiBold13,
-                  ),
-                  const SizedBox(
-                    height: 6,
-                  ),
+                  Text(title, style: AppStyles.semiBold13),
+                  const SizedBox(height: 6),
                   Text(
                     subTitle,
                     textAlign: TextAlign.right,
-                    style: AppStyles.regular13
-                        .copyWith(color: Colors.black.withValues(alpha: .5)),
-                  )
+                    style: AppStyles.regular13.copyWith(
+                      color: Colors.black.withValues(alpha: .5),
+                    ),
+                  ),
                 ],
               ),
               const Spacer(),
@@ -71,7 +66,7 @@ class ShippingItem extends StatelessWidget {
                     color: AppColors.lightPrimaryColor,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -81,9 +76,7 @@ class ShippingItem extends StatelessWidget {
 }
 
 class InActiveShippingItemDot extends StatelessWidget {
-  const InActiveShippingItemDot({
-    super.key,
-  });
+  const InActiveShippingItemDot({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -91,18 +84,14 @@ class InActiveShippingItemDot extends StatelessWidget {
       width: 18,
       height: 18,
       decoration: const ShapeDecoration(
-        shape: OvalBorder(
-          side: BorderSide(width: 1, color: Color(0xFF949D9E)),
-        ),
+        shape: OvalBorder(side: BorderSide(width: 1, color: Color(0xFF949D9E))),
       ),
     );
   }
 }
 
 class ActiveShippingItemDot extends StatelessWidget {
-  const ActiveShippingItemDot({
-    super.key,
-  });
+  const ActiveShippingItemDot({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -111,9 +100,7 @@ class ActiveShippingItemDot extends StatelessWidget {
       height: 18,
       decoration: const ShapeDecoration(
         color: Color(0xFF1B5E37),
-        shape: OvalBorder(
-          side: BorderSide(width: 4, color: Colors.white),
-        ),
+        shape: OvalBorder(side: BorderSide(width: 4, color: Colors.white)),
       ),
     );
   }

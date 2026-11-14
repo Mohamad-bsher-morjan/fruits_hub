@@ -3,7 +3,6 @@ import 'package:fruits_hub/core/utils/app_images.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 import 'package:svg_flutter/svg.dart';
 
-
 class ProductsViewHeader extends StatelessWidget {
   const ProductsViewHeader({super.key, required this.productsLength});
   final int productsLength;
@@ -26,10 +25,8 @@ class ProductsViewHeader extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
             ),
           ),
-          child: SvgPicture.asset(
-            Assets.imagesFilter2,
-          ),
-        )
+          child: SvgPicture.asset(Assets.imagesFilter2),
+        ),
       ],
     );
   }

@@ -3,12 +3,12 @@ import 'package:fruits_hub/core/utils/app_text_styles.dart';
 import 'package:fruits_hub/core/widgets/notification_widget.dart';
 
 AppBar buildAppBar(
-  BuildContext context, 
-   String text,
-  {bool showNotification = true,
+  BuildContext context,
+  String text, {
+  bool showNotification = true,
 }) {
   return AppBar(
-    actions:  [
+    actions: [
       Visibility(
         visible: showNotification,
         child: Padding(

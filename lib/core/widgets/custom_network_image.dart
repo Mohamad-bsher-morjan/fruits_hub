@@ -19,11 +19,7 @@ class CustomNetworkImage extends StatelessWidget {
             constraints.maxWidth.isFinite && constraints.maxWidth > 0
             ? (constraints.maxWidth * devicePixelRatio).round()
             : null;
-        return Image.network(
-          imageUrl,
-          fit: fit,
-          cacheWidth: cacheWidth,
-        );
+        return Image.network(imageUrl, fit: fit, cacheWidth: cacheWidth);
       },
     );
   }

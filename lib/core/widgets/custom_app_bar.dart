@@ -5,10 +5,12 @@ import 'package:fruits_hub/core/widgets/notification_widget.dart';
 AppBar buildAppBar(BuildContext context, {required String title}) {
   return AppBar(
     backgroundColor: Colors.white,
-    actions: [Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: const NotificationWidget(),
-    )],
+    actions: [
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: const NotificationWidget(),
+      ),
+    ],
     leading: GestureDetector(
       onTap: () {
         Navigator.pop(context);

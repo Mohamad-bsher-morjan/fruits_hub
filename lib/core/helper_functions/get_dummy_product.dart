@@ -1,4 +1,3 @@
-
 import 'package:fruits_hub/core/entities/product_entity.dart';
 
 ProductEntity getDummyProduct() {

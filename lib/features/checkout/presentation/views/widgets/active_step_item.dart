@@ -3,8 +3,8 @@ import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 
 class ActiveStepItem extends StatelessWidget {
-  const ActiveStepItem({super.key,  required this.text});
-  
+  const ActiveStepItem({super.key, required this.text});
+
   final String text;
 
   @override

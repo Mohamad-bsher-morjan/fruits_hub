@@ -50,7 +50,9 @@ class PageViewItem extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         Prefs.setBool(kIsOnBoardingViewSeen, true);
-                        Navigator.of(context).pushReplacementNamed(SigninView.routeName);
+                        Navigator.of(
+                          context,
+                        ).pushReplacementNamed(SigninView.routeName);
                       },
                       child: Text(
                         'تخطي',

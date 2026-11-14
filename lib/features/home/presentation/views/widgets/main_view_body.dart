@@ -5,10 +5,7 @@ import 'package:fruits_hub/features/home/presentation/views/profile_view.dart';
 import 'package:fruits_hub/features/home/presentation/views/widgets/home_view.dart';
 
 class MainViewBody extends StatefulWidget {
-  const MainViewBody({
-    super.key,
-    required this.currentViewIndex,
-  });
+  const MainViewBody({super.key, required this.currentViewIndex});
 
   final int currentViewIndex;
 
