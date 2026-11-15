@@ -14,7 +14,7 @@ class ItemList {
         .map((cartItemEntity) => ItemEntity.fromCartItemEntity(cartItemEntity))
         .toList(),
   );
-  Map<String, dynamic> toJson() => {
-    'items': items?.map((e) => e.toJson()).toList(),
+  Map<String, dynamic> toMap() => {
+    'items': items?.map((e) => e.toMap()).toList(),
   };
 }

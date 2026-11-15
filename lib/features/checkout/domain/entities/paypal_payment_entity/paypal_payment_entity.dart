@@ -17,5 +17,13 @@ class PaypalPaymentEntity {
       itemList: ItemList.fromCartItemEntities(orderEntity.cartEntity.cartItems),
     );
   }
+  Map<String, dynamic> toMap(){
+    return{
+'amount': amount?.toMap(),
+      'description': description,
+      'itemList': itemList?.toMap(),
+
+    };
+  }
 
 }

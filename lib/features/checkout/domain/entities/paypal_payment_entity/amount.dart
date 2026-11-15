@@ -17,6 +17,12 @@ factory Amount.fromEntity(OrderEntity orderEntity) {
       details: DetailsEntity.fromOrderEntity(orderEntity),
     );
   }
-
+Map<String, dynamic> toMap(){
+    return{
+      'total': total,
+      'currency': currency,
+      'details': details?.toMap(),
+    };
+  }
   
 }

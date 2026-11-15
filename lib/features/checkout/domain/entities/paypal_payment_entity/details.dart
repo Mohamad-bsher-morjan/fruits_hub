@@ -22,4 +22,11 @@ class DetailsEntity {
       shippingDiscount: orderEntity.calculateShippingDisscount(),
     );
   }
+  Map<String, dynamic> toMap(){
+    return{
+      'subtotal': subtotal,
+      'shipping': shipping,
+      'shipping_discount': shippingDiscount,
+    };
+  }
 }

@@ -16,7 +16,7 @@ class ItemEntity {
     currency: getCurrency(),
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
     'name': name,
     'quantity': quantity,
     'price': price,
