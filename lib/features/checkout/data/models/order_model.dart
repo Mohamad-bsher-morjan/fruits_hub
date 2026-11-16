@@ -34,6 +34,7 @@ class OrderModel {
     return {
       'totalPrice': totalPrice,
       'uId': uId,
+      'status':'pending',
       'shippingAddress': shippingAddress.toMap(),
       'orderProducts': orderProducts.map((x) => x.toMap()).toList(),
       'paymentMethod': paymentMethod,

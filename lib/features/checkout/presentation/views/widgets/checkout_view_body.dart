@@ -9,6 +9,7 @@ import 'package:fruits_hub/core/widgets/custom_button.dart';
 import 'package:fruits_hub/core/widgets/custom_snack_bar.dart';
 import 'package:fruits_hub/features/checkout/domain/entities/order_entity.dart';
 import 'package:fruits_hub/features/checkout/domain/entities/paypal_payment_entity/paypal_payment_entity.dart';
+import 'package:fruits_hub/features/checkout/presentation/cubits/add_order/add_order_cubit.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/checkout_steps.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/checkout_steps_page_view.dart';
 
@@ -74,8 +75,6 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
               } else {
                 _processPayment(context);
               }
-              //   var orderEntity= context.read<OrderEntity>();
-              //  context.read<AddOrderCubit>().addOrder(order:orderEntity);}
             },
           ),
           SizedBox(height: 32),
@@ -127,6 +126,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
     PaypalPaymentEntity paypalPaymentEntity = PaypalPaymentEntity.fromEntity(
       orderEntity,
     );
+    var addOrderCubit = context.read<AddOrderCubit>();
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) => PaypalCheckoutView(
@@ -137,6 +137,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
           note: "Contact us for any questions on your order.",
           onSuccess: (Map params) async {
             Navigator.pop(context);
+            addOrderCubit.addOrder(order: orderEntity);
             CustomSnackBar.showSuccess(context, message: 'تمت العملية بنجاح');
           },
           onError: (error) {
