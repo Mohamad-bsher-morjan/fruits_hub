@@ -51,7 +51,7 @@ class CustomSnackBar {
     );
   }
 
-  static void showAlert(BuildContext context, {required String message}) {
+  static void showAlert(BuildContext context,{required String message}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         behavior: SnackBarBehavior.floating,
