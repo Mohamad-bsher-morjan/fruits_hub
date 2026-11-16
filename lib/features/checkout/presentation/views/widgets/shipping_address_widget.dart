@@ -4,7 +4,7 @@ import 'package:fruits_hub/core/utils/app_images.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 import 'package:fruits_hub/features/checkout/domain/entities/order_entity.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/payment__item.dart';
-import 'package:svg_flutter/svg_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ShippingAddressWidget extends StatelessWidget {
   const ShippingAddressWidget({super.key, required this.pageController});

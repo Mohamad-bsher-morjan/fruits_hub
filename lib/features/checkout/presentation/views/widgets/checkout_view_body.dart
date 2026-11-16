@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
@@ -134,11 +136,17 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
           transactions: [paypalPaymentEntity.toMap()],
           note: "Contact us for any questions on your order.",
           onSuccess: (Map params) async {
-            print("onSuccess: $params");
+            Navigator.pop(context);
+            CustomSnackBar.showSuccess(context, message: 'تمت العملية بنجاح');
           },
           onError: (error) {
-            print("onError: $error");
             Navigator.pop(context);
+            CustomSnackBar.showError(
+              context,
+              message: 'حدث خطأ في عملية الدفع',
+            );
+
+            log(error.toString());
           },
           onCancel: () {
             print('cancelled:');

@@ -1,3 +1,3 @@
  String getCurrency() {
-    return 'SY';
+    return 'USD';
   }
