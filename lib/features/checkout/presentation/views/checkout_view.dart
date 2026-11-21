@@ -4,7 +4,7 @@ import 'package:fruits_hub/core/helper_functions/get_user.dart';
 import 'package:fruits_hub/core/repos/orders_repo/orders_repo.dart';
 import 'package:fruits_hub/core/services/get_it_service.dart';
 import 'package:fruits_hub/core/widgets/build_app_bar.dart';
-import 'package:fruits_hub/features/checkout/domain/entities/order_entity.dart';
+import 'package:fruits_hub/features/checkout/domain/entities/order_input_entity.dart';
 import 'package:fruits_hub/features/checkout/domain/entities/shipping_address_entity.dart';
 import 'package:fruits_hub/features/checkout/presentation/cubits/add_order/add_order_cubit.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/add_order_cubit_bloc_builder.dart';
@@ -23,8 +23,8 @@ class CheckoutView extends StatelessWidget {
       create: (context) => AddOrderCubit(ordersRepo: getIt.get<OrdersRepo>()),
       child: Scaffold(
         appBar: buildAppBar(context, 'الشحن', showNotification: false),
-        body: Provider<OrderEntity>(
-          create: (context) => OrderEntity(
+        body: Provider<OrderInputEntity>(
+          create: (context) => OrderInputEntity(
             cartEntity: cartEntity,
             shippingAddressEntity: ShippingAddressEntity(),
             uID: getUser().uId,

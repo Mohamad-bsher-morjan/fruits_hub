@@ -7,6 +7,7 @@ import 'package:fruits_hub/features/auth/presentation/views/signin_view.dart';
 import 'package:fruits_hub/features/home/presentation/views/main_view.dart';
 import 'package:fruits_hub/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:rive/rive.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -16,10 +17,24 @@ class SplashViewBody extends StatefulWidget {
 }
 
 class _SplashViewBodyState extends State<SplashViewBody> {
+
+  static const _logoAnimation = 'assets/animations/fruits_hub_logo.riv';
+
+  late final FileLoader _logoLoader = FileLoader.fromAsset(
+    _logoAnimation,
+    riveFactory: Factory.rive,
+  );
+
   @override
   void initState() {
     super.initState();
     excuteNavigation();
+  }
+
+  @override
+  void dispose() {
+    _logoLoader.dispose();
+    super.dispose();
   }
 
   @override
@@ -31,7 +46,21 @@ class _SplashViewBodyState extends State<SplashViewBody> {
           alignment: Alignment.centerLeft,
           child: SvgPicture.asset(Assets.imagesPlant),
         ),
-        SvgPicture.asset(Assets.imagesLogo),
+        SizedBox(
+          width: 200,
+          height: 195,
+          child: RiveWidgetBuilder(
+            fileLoader: _logoLoader,
+            stateMachineSelector: const StateMachineNamed('Logo'),
+            builder: (context, state) => state is RiveLoaded
+                ? RiveWidget(
+                    controller: state.controller,
+                    fit: Fit.contain,
+                  )
+            
+                : SvgPicture.asset(Assets.imagesLogo),
+          ),
+        ),
         SvgPicture.asset(Assets.imagesSplashBottom),
       ],
     );

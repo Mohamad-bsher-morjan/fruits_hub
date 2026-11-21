@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub/core/utils/app_images.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
-import 'package:fruits_hub/features/checkout/domain/entities/order_entity.dart';
+import 'package:fruits_hub/features/checkout/domain/entities/order_input_entity.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/payment__item.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -19,7 +19,7 @@ class ShippingAddressWidget extends StatelessWidget {
           SvgPicture.asset(Assets.imagesLocation),
           const SizedBox(width: 8),
           Text(
-            '${context.read<OrderEntity>().shippingAddressEntity}',
+            '${context.read<OrderInputEntity>().shippingAddressEntity}',
             textAlign: TextAlign.right,
             style: AppStyles.regular13.copyWith(color: const Color(0xFF4E5556)),
           ),
