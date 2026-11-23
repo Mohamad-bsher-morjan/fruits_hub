@@ -32,11 +32,19 @@ class _ProductsViewBodyState extends State<ProductsViewBody> {
                 const SizedBox(height: 16),
                 buildAppBar(context, 'الأكثر مبيعًا'),
                 const SizedBox(height: 16),
-                SearchTextField(),
+                SearchTextField(onChanged: (query) {
+                  context.read<ProductsCubit>().searchProducts(query:query );
+                },),
 
                 const SizedBox(height: 12),
-                ProductsViewHeader(
-                  productsLength: context.read<ProductsCubit>().productLength,
+                BlocBuilder<ProductsCubit, ProductsState>(
+                  builder: (context, state) {
+                    return ProductsViewHeader(
+                      productsLength: state is ProductsSuccess
+                          ? state.products.length
+                          : 0,
+                    );
+                  },
                 ),
                 SizedBox(height: 8),
               ],

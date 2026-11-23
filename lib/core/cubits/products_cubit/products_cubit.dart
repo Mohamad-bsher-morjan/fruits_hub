@@ -14,7 +14,10 @@ class ProductsCubit extends Cubit<ProductsState> {
     var result = await productsRepo.getProducts();
     result.fold(
       (failure) => emit(ProductsFailuer(errMessage: failure.errMessage)),
-      (products) => emit(ProductsSuccess(products: products)),
+      (products) {
+        productLength = products.length;
+        emit(ProductsSuccess(products: products));
+      },
     );
   }
 
