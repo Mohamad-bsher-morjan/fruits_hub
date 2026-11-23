@@ -55,4 +55,28 @@ class ProductsRepoImpl extends ProductsRepo {
       return left(ServerFailure(errMessage: 'تعذر جلب المنتجات'));
     }
   }
+
+  @override
+  Future<Either<Failure, List<ProductEntity>>> searchProducts({
+    required String query,
+  }) async {
+    try {
+      var data =
+          await databaseService.getData(path: BackendEndpoint.getProducts)
+              as List<Map<String, dynamic>>;
+
+      List<ProductEntity> products = data
+          .map((e) => ProductModel.fromMap(e).toEntity())
+          .where(
+            (product) =>
+                product.name.toLowerCase().contains(query.toLowerCase()),
+          )
+          .toList();
+
+      return right(products);
+    } catch (e, stackTrace) {
+      log('searchProducts failed', error: e, stackTrace: stackTrace);
+      return left(ServerFailure(errMessage: 'تعذر البحث عن المنتجات'));
+    }
+  }
 }

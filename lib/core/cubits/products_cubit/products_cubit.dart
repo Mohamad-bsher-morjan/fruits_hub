@@ -29,4 +29,13 @@ class ProductsCubit extends Cubit<ProductsState> {
       },
     );
   }
+
+  Future<void> searchProducts({required String query}) async {
+    emit(ProductsLoading());
+    var result = await productsRepo.searchProducts(query: query);
+    result.fold(
+      (l) => emit(ProductsFailuer(errMessage: l.errMessage)),
+      (r) => emit(ProductsSuccess(products: r)),
+    );
+  }
 }

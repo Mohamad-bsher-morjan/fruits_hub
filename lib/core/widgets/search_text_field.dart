@@ -4,8 +4,8 @@ import 'package:fruits_hub/core/utils/app_images.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 
 class SearchTextField extends StatelessWidget {
-  const SearchTextField({super.key});
-
+  const SearchTextField({super.key, this.onChanged,});
+final void Function(String value)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +19,7 @@ class SearchTextField extends StatelessWidget {
           ),
         ],
       ),
-      child: TextField(
+      child: TextField(onChanged:onChanged,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
           prefixIcon: SizedBox(
