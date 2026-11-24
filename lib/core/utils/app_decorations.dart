@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 
 abstract class AppDecorations {
-  static var greyBoxDecoration = ShapeDecoration(
-    color: const Color(0x7FF2F3F3),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-  );
+  static ShapeDecoration greyBoxDecoration(BuildContext context) {
+    return ShapeDecoration(
+      color: context.palette.card,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+    );
+  }
 }

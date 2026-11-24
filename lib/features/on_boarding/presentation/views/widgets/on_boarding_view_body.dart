@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:fruits_hub/constants.dart';
 import 'package:fruits_hub/core/services/shared_preferences_singleton.dart';
 import 'package:fruits_hub/core/utils/app_colors.dart';
@@ -43,8 +44,8 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
           dotsCount: 2,
           position: currentPage.toDouble(),
           decorator: DotsDecorator(
-            activeColor: AppColors.primaryColor,
-            color: AppColors.primaryColor.withValues(alpha: .5),
+            activeColor: context.palette.accent,
+            color: context.palette.accent.withValues(alpha: .5),
           ),
         ),
         const SizedBox(height: 10),

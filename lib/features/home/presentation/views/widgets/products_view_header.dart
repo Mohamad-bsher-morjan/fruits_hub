@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:fruits_hub/core/utils/app_images.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,13 +20,19 @@ class ProductsViewHeader extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: ShapeDecoration(
-            color: Colors.white.withValues(alpha: 0.10000000149011612),
+            color: context.palette.surface.withValues(alpha: 0.1),
             shape: RoundedRectangleBorder(
-              side: const BorderSide(width: 1, color: Color(0x66CACECE)),
+              side: BorderSide(width: 1, color: context.palette.border),
               borderRadius: BorderRadius.circular(4),
             ),
           ),
-          child: SvgPicture.asset(Assets.imagesFilter2),
+          child: SvgPicture.asset(
+            Assets.imagesFilter2,
+            colorFilter: ColorFilter.mode(
+              context.palette.mutedIcon,
+              BlendMode.srcIn,
+            ),
+          ),
         ),
       ],
     );

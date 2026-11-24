@@ -15,7 +15,7 @@ class PaymentItem extends StatelessWidget {
         SizedBox(height: 8),
         Container(
           padding: .symmetric(vertical: 16, horizontal: 8),
-          decoration: AppDecorations.greyBoxDecoration,
+          decoration: AppDecorations.greyBoxDecoration(context),
           child: child,
         ),
       ],

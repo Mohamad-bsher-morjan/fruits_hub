@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class BestSellingGridViewSkeleton extends StatelessWidget {
@@ -28,7 +29,7 @@ class _FruitItemSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: ShapeDecoration(
-        color: const Color(0xfff3f5f7),
+        color: context.palette.card,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
       child: Stack(

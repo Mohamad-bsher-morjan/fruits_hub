@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 
@@ -28,10 +29,10 @@ class ShippingItem extends StatelessWidget {
         ),
         clipBehavior: Clip.antiAlias,
         decoration: ShapeDecoration(
-          color: const Color(0x33D9D9D9),
+          color: context.palette.card.withValues(alpha: 0.6),
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: isSelected ? AppColors.primaryColor : Colors.transparent,
+              color: isSelected ? context.palette.accent : Colors.transparent,
             ),
             borderRadius: BorderRadius.circular(4),
           ),
@@ -53,7 +54,7 @@ class ShippingItem extends StatelessWidget {
                     subTitle,
                     textAlign: TextAlign.right,
                     style: AppStyles.regular13.copyWith(
-                      color: Colors.black.withValues(alpha: .5),
+                      color: context.palette.hint,
                     ),
                   ),
                 ],
@@ -63,7 +64,7 @@ class ShippingItem extends StatelessWidget {
                 child: Text(
                   '$price جنيه',
                   style: AppStyles.bold13.copyWith(
-                    color: AppColors.lightPrimaryColor,
+                    color: context.palette.accent,
                   ),
                 ),
               ),
@@ -83,8 +84,10 @@ class InActiveShippingItemDot extends StatelessWidget {
     return Container(
       width: 18,
       height: 18,
-      decoration: const ShapeDecoration(
-        shape: OvalBorder(side: BorderSide(width: 1, color: Color(0xFF949D9E))),
+      decoration: ShapeDecoration(
+        shape: OvalBorder(
+          side: BorderSide(width: 1, color: context.palette.mutedIcon),
+        ),
       ),
     );
   }
@@ -98,9 +101,11 @@ class ActiveShippingItemDot extends StatelessWidget {
     return Container(
       width: 18,
       height: 18,
-      decoration: const ShapeDecoration(
-        color: Color(0xFF1B5E37),
-        shape: OvalBorder(side: BorderSide(width: 4, color: Colors.white)),
+      decoration: ShapeDecoration(
+        color: AppColors.primaryColor,
+        shape: OvalBorder(
+          side: BorderSide(width: 4, color: context.palette.surface),
+        ),
       ),
     );
   }

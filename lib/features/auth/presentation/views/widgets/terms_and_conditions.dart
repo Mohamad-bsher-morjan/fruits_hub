@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_hub/core/utils/app_colors.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 
 class TermsAndConditions extends StatefulWidget {
@@ -35,27 +35,27 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                 TextSpan(
                   text: 'من خلال انشاء الحساب فانك توافق على ',
                   style: AppStyles.semiBold13.copyWith(
-                    color: Color(0xff949d9e),
+                    color: context.palette.hint,
                   ),
                 ),
                 TextSpan(
                   text: 'الشروط والأحكام',
                   style: AppStyles.semiBold13.copyWith(
-                    color: AppColors.lightPrimaryColor,
+                    color: context.palette.accent,
                   ),
                 ),
                 TextSpan(text: ' ', style: AppStyles.semiBold13.copyWith()),
                 TextSpan(
                   text: 'الخاصة',
                   style: AppStyles.semiBold13.copyWith(
-                    color: AppColors.lightPrimaryColor,
+                    color: context.palette.accent,
                   ),
                 ),
                 TextSpan(text: ' ', style: AppStyles.semiBold13.copyWith()),
                 TextSpan(
                   text: 'بنا',
                   style: AppStyles.semiBold13.copyWith(
-                    color: AppColors.lightPrimaryColor,
+                    color: context.palette.accent,
                   ),
                 ),
               ],

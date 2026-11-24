@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
+import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/utils/app_images.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
@@ -16,33 +18,37 @@ class CustomBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 75,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(40)),
-        color: Colors.white,
-        border: Border(top: BorderSide(color: Color(0xffeeeeee), width: 1)),
+        color: context.palette.surface,
+        border: Border(top: BorderSide(color: context.palette.divider, width: 1)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildItem(
+            context: context,
             index: 0,
             activeIconPath: Assets.imagesVuesaxBoldHome,
             inactiveIconPath: Assets.imagesVuesaxOutlineHome,
             label: 'الرئيسية',
           ),
           _buildItem(
+            context: context,
             index: 1,
             activeIconPath: Assets.imagesVuesaxBoldProducts,
             inactiveIconPath: Assets.imagesVuesaxOutlineProducts,
             label: 'المنتجات',
           ),
           _buildItem(
+            context: context,
             index: 2,
             activeIconPath: Assets.imagesVuesaxBoldShoppingCart,
             inactiveIconPath: Assets.imagesVuesaxOutlineShoppingCart,
             label: 'سلة التسوق',
           ),
           _buildItem(
+            context: context,
             index: 3,
             activeIconPath: Assets.imagesVuesaxBoldUser,
             inactiveIconPath: Assets.imagesVuesaxOutlineUser,
@@ -54,6 +60,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   }
 
   Widget _buildItem({
+    required BuildContext context,
     required int index,
     required String activeIconPath,
     required String inactiveIconPath,
@@ -74,12 +81,14 @@ class CustomBottomNavigationBar extends StatelessWidget {
           right: isSelected ? 4 : 10,
         ),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xfff1f4f2) : Colors.transparent,
+          color: isSelected
+              ? context.palette.selectedSurface
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(30),
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: const Color(0xff087443).withValues(alpha: 0.18),
+                    color: context.palette.accent.withValues(alpha: 0.18),
                     blurRadius: 14,
                     offset: const Offset(0, 4),
                   ),
@@ -98,7 +107,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               padding: EdgeInsets.all(isSelected ? 9 : 7),
               decoration: BoxDecoration(
                 color: isSelected
-                    ? const Color(0xff087443)
+                    ? AppColors.primaryColor
                     : Colors.transparent,
                 shape: BoxShape.circle,
               ),
@@ -122,7 +131,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   isSelected ? activeIconPath : inactiveIconPath,
                   key: ValueKey<bool>(isSelected),
                   colorFilter: ColorFilter.mode(
-                    isSelected ? Colors.white : Colors.grey,
+                    isSelected
+                      ? context.palette.onPrimary
+                      : context.palette.mutedIcon,
                     BlendMode.srcIn,
                   ),
                   fit: BoxFit.contain,
@@ -149,10 +160,10 @@ class CustomBottomNavigationBar extends StatelessWidget {
                         ),
                         child: Text(
                           label,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xff176b4d),
+                            color: context.palette.accent,
                           ),
                         ),
                       ),

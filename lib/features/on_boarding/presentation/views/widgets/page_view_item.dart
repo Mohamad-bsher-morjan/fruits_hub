@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:fruits_hub/constants.dart';
 import 'package:fruits_hub/core/services/shared_preferences_singleton.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
@@ -57,7 +58,7 @@ class PageViewItem extends StatelessWidget {
                       child: Text(
                         'تخطي',
                         style: AppStyles.regular13.copyWith(
-                          color: Color(0xff949d9e),
+                          color: context.palette.hint,
                         ),
                       ),
                     ),
@@ -76,7 +77,7 @@ class PageViewItem extends StatelessWidget {
           child: Text(
             subTitle,
             textAlign: TextAlign.center,
-            style: AppStyles.semiBold13.copyWith(color: Color(0xff4e5456)),
+            style: AppStyles.semiBold13.copyWith(color: context.palette.subtitle),
           ),
         ),
       ],

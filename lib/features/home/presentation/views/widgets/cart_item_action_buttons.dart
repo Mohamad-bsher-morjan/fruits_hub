@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
@@ -13,7 +14,7 @@ class CartItemActionButtons extends StatelessWidget {
     return Row(
       children: [
         CartItemActionButton(
-          iconColor: Colors.white,
+          iconColor: context.palette.onPrimary,
           icon: Icons.add,
           color: AppColors.primaryColor,
           onPressed: () {
@@ -30,9 +31,9 @@ class CartItemActionButtons extends StatelessWidget {
           ),
         ),
         CartItemActionButton(
-          iconColor: Colors.grey,
+          iconColor: context.palette.mutedIcon,
           icon: Icons.remove,
-          color: const Color(0xFFF3F5F7),
+          color: context.palette.card,
           onPressed: () {
             cartItemEntity.decreaseQuantity();
             context.read<CartItemCubit>().updateCartItem(cartItemEntity);

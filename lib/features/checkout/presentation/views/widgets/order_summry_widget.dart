@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 import 'package:fruits_hub/features/checkout/domain/entities/order_input_entity.dart';
@@ -18,7 +19,7 @@ class OrderSummryWidget extends StatelessWidget {
               Text(
                 'المجموع الفرعي :',
                 style: AppStyles.regular13.copyWith(
-                  color: const Color(0xff4e5556),
+                  color: context.palette.subtitle,
                 ),
               ),
               const Spacer(),
@@ -35,7 +36,7 @@ class OrderSummryWidget extends StatelessWidget {
               Text(
                 'التوصيل :',
                 style: AppStyles.regular13.copyWith(
-                  color: const Color(0xff4e5556),
+                  color: context.palette.subtitle,
                 ),
               ),
               const Spacer(),
@@ -43,13 +44,13 @@ class OrderSummryWidget extends StatelessWidget {
                 '30 جنيه',
                 textAlign: .right,
                 style: AppStyles.regular13.copyWith(
-                  color: const Color(0xff4e5556),
+                  color: context.palette.subtitle,
                 ),
               ),
             ],
           ),
           SizedBox(height: 9),
-          const Divider(thickness: .5, color: Color(0xffcacece)),
+          Divider(thickness: .5, color: context.palette.divider),
           SizedBox(height: 9),
           Row(
             children: [

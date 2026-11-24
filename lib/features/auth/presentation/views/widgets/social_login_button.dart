@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -21,7 +22,7 @@ class SocialLoginButton extends StatelessWidget {
       child: TextButton(
         style: TextButton.styleFrom(
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: Color(0xffdcdede), width: 1),
+            side: BorderSide(color: context.palette.border, width: 1),
             borderRadius: BorderRadius.circular(16),
           ),
         ),

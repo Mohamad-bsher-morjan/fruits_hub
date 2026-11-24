@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/utils/app_images.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
@@ -30,7 +31,7 @@ class OnBoardingPageView extends StatelessWidget {
               ),
               Text(
                 'Fruit',
-                style: AppStyles.bold23.copyWith(color: AppColors.primaryColor),
+                style: AppStyles.bold23.copyWith(color: context.palette.accent),
               ),
             ],
           ),
@@ -46,7 +47,7 @@ class OnBoardingPageView extends StatelessWidget {
             'ابحث وتسوق',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Color(0xff0C0D0D),
+              color: Theme.of(context).colorScheme.onSurface,
               fontSize: 23,
               fontFamily: 'Cairo',
               fontWeight: FontWeight.w700,

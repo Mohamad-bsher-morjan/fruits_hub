@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruits_hub/core/utils/app_images.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
@@ -22,7 +23,7 @@ class SearchTextField extends StatelessWidget {
             spreadRadius: 0,
             offset: Offset(0, 2),
             blurRadius: 9,
-            color: Color(0X0a000000),
+            color: context.palette.shadow,
           ),
         ],
       ),
@@ -34,30 +35,46 @@ class SearchTextField extends StatelessWidget {
         decoration: InputDecoration(
           prefixIcon: SizedBox(
             width: 20,
-            child: Center(child: SvgPicture.asset(Assets.imagesSearchIcon)),
+            child: Center(
+              child: SvgPicture.asset(
+                Assets.imagesSearchIcon,
+                colorFilter: ColorFilter.mode(
+                  context.palette.accent,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
           ),
           suffixIcon: SizedBox(
             width: 20,
-            child: Center(child: SvgPicture.asset(Assets.imagesFilter)),
+            child: Center(
+              child: SvgPicture.asset(
+                Assets.imagesFilter,
+                colorFilter: ColorFilter.mode(
+                  context.palette.mutedIcon,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
           ),
           hintStyle: AppStyles.regular13.copyWith(
-            color: const Color(0xFF949D9E),
+            color: context.palette.hint,
           ),
           hintText: 'ابحث عن.....',
           filled: true,
-          fillColor: Colors.white,
-          border: buildBorder(),
-          enabledBorder: buildBorder(),
-          focusedBorder: buildBorder(),
+          fillColor: context.palette.fieldFill,
+          border: buildBorder(context),
+          enabledBorder: buildBorder(context),
+          focusedBorder: buildBorder(context),
         ),
       ),
     );
   }
 
-  OutlineInputBorder buildBorder() {
+  OutlineInputBorder buildBorder(BuildContext context) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(4),
-      borderSide: const BorderSide(width: 1, color: Colors.white),
+      borderSide: BorderSide(width: 1, color: context.palette.border),
     );
   }
 }

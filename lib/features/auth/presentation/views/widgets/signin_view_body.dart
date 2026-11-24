@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub/constants.dart';
 import 'package:fruits_hub/core/utils/app_colors.dart';
@@ -56,7 +57,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                   Text(
                     'نسيت كلمة المرور؟',
                     style: AppStyles.semiBold13.copyWith(
-                      color: AppColors.lightPrimaryColor,
+                      color: context.palette.accent,
                     ),
                   ),
                 ],

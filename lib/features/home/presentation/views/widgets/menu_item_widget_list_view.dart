@@ -1,7 +1,10 @@
 import 'package:awesome_icons/awesome_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
+import 'package:fruits_hub/core/theme/theme_provider.dart';
 import 'package:fruits_hub/features/home/presentation/views/model/menu_item_model.dart';
 import 'package:fruits_hub/features/home/presentation/views/widgets/menu_item_widget.dart';
+import 'package:provider/provider.dart';
 
 class MenuItemsWidgetListView extends StatefulWidget {
   const MenuItemsWidgetListView({super.key});
@@ -50,12 +53,22 @@ class _MenuItemsWidgetListViewState extends State<MenuItemsWidgetListView> {
         title: 'الوضع',
         icon: FontAwesomeIcons.magic,
         onTap: () {},
-        trailing: Switch(
-          value: notificationsEnabled,
-          onChanged: (value) {
-            setState(() {
-              notificationsEnabled = value;
-            });
+        trailing: Consumer<ThemeProvider>(
+          builder: (context, provider, child) {
+            return PopupMenuButton<ThemeMode>(
+              initialValue: provider.themeMode,
+              onSelected: provider.setThemeMode,
+              icon: Icon(Icons.brightness_4, color: context.palette.accent),
+              tooltip: 'الوضع',
+              itemBuilder: (context) => const [
+                PopupMenuItem(
+                  value: ThemeMode.system,
+                  child: Text('حسب النظام'),
+                ),
+                PopupMenuItem(value: ThemeMode.light, child: Text('فاتح')),
+                PopupMenuItem(value: ThemeMode.dark, child: Text('داكن')),
+              ],
+            );
           },
         ),
       ),

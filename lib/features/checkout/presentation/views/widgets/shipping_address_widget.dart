@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub/core/utils/app_images.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
@@ -16,12 +17,18 @@ class ShippingAddressWidget extends StatelessWidget {
       title: 'عنوان التوصيل',
       child: Row(
         children: [
-          SvgPicture.asset(Assets.imagesLocation),
+          SvgPicture.asset(
+            Assets.imagesLocation,
+            colorFilter: ColorFilter.mode(
+              context.palette.accent,
+              BlendMode.srcIn,
+            ),
+          ),
           const SizedBox(width: 8),
           Text(
             '${context.read<OrderInputEntity>().shippingAddressEntity}',
             textAlign: TextAlign.right,
-            style: AppStyles.regular13.copyWith(color: const Color(0xFF4E5556)),
+            style: AppStyles.regular13.copyWith(color: context.palette.subtitle),
           ),
           const Spacer(),
           GestureDetector(
@@ -35,12 +42,18 @@ class ShippingAddressWidget extends StatelessWidget {
             child: SizedBox(
               child: Row(
                 children: [
-                  SvgPicture.asset(Assets.imagesEdit),
+                  SvgPicture.asset(
+                    Assets.imagesEdit,
+                    colorFilter: ColorFilter.mode(
+                      context.palette.mutedIcon,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                   const SizedBox(width: 4),
                   Text(
                     'تعديل',
                     style: AppStyles.semiBold13.copyWith(
-                      color: const Color(0xFF949D9E),
+                      color: context.palette.hint,
                     ),
                   ),
                 ],

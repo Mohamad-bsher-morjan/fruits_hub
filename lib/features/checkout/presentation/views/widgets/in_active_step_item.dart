@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 
 class InActiveStepItem extends StatelessWidget {
@@ -12,13 +13,13 @@ class InActiveStepItem extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 10,
-          backgroundColor: Color(0xfff2f3f3),
+          backgroundColor: context.palette.card,
           child: Text(index, style: AppStyles.semiBold13),
         ),
         SizedBox(width: 4),
         Text(
           text,
-          style: AppStyles.semiBold13.copyWith(color: Color(0xffaaaaaa)),
+          style: AppStyles.semiBold13.copyWith(color: context.palette.hint),
         ),
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:fruits_hub/core/widgets/custom_text_field.dart';
 
 class PasswordField extends StatefulWidget {
@@ -26,8 +27,8 @@ class _PasswordFieldState extends State<PasswordField> {
           });
         },
         child: isPasswordVisible
-            ? Icon(Icons.visibility_off, color: Color(0xffc9cecf))
-            : Icon(Icons.remove_red_eye, color: Color(0xffc9cecf)),
+            ? Icon(Icons.visibility_off, color: context.palette.mutedIcon)
+            : Icon(Icons.remove_red_eye, color: context.palette.mutedIcon),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:fruits_hub/features/home/domain/entities/cart_item_entity.dart';
 import 'package:fruits_hub/features/home/presentation/views/widgets/cart_item.dart';
 
@@ -25,6 +26,6 @@ class CustomDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Divider(height: 22, color: Color(0xfff1f1f5));
+    return Divider(height: 22, color: context.palette.divider);
   }
 }

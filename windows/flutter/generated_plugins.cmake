@@ -7,7 +7,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   cloud_firestore
   firebase_auth
   flutter_inappwebview_windows
-  rive_native
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

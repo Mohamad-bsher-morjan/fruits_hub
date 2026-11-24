@@ -1,30 +1,60 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:fruits_hub/main.dart';
+import 'package:fruits_hub/core/services/shared_preferences_singleton.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
+import 'package:fruits_hub/core/theme/app_theme.dart';
+import 'package:fruits_hub/core/theme/theme_provider.dart';
+import 'package:fruits_hub/features/home/presentation/views/widgets/menu_item_widget_list_view.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const FruitHub());
+  setUp(() async {
+    SharedPreferences.setMockInitialValues(<String, Object>{});
+    await Prefs.init();
+  });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  AppPalette? capturedPalette;
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  Widget paletteProbe() => Builder(
+        builder: (context) {
+          capturedPalette = context.palette;
+          return const SizedBox.shrink();
+        },
+      );
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  testWidgets('the palette follows the active theme', (tester) async {
+    await tester.pumpWidget(Theme(data: AppTheme.lightTheme, child: paletteProbe()));
+    expect(capturedPalette!.card, AppPalette.light.card);
+
+    await tester.pumpWidget(Theme(data: AppTheme.darkTheme, child: paletteProbe()));
+    expect(capturedPalette!.card, AppPalette.dark.card);
+  });
+
+  testWidgets('theme menu offers system, light and dark modes', (tester) async {
+    await tester.pumpWidget(
+      ChangeNotifierProvider(
+        create: (_) => ThemeProvider(),
+        child: MaterialApp(
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          home: const Scaffold(body: MenuItemsWidgetListView()),
+        ),
+      ),
+    );
+
+    await tester.tap(find.byIcon(Icons.brightness_4));
+    await tester.pumpAndSettle();
+
+    expect(find.text('حسب النظام'), findsOneWidget);
+    expect(find.text('فاتح'), findsOneWidget);
+    expect(find.text('داكن'), findsOneWidget);
+
+    await tester.tap(find.text('داكن'));
+    await tester.pumpAndSettle();
+
+    final provider = tester.element(find.byType(MenuItemsWidgetListView))
+        .read<ThemeProvider>();
+    expect(provider.themeMode, ThemeMode.dark);
   });
 }

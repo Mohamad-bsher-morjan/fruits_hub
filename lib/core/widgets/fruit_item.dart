@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub/core/entities/product_entity.dart';
 import 'package:fruits_hub/core/utils/app_colors.dart';
@@ -13,7 +14,7 @@ class FruitItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: ShapeDecoration(
-        color: Color(0xfff3f5f7),
+        color: context.palette.card,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
       child: Stack(
@@ -35,7 +36,7 @@ class FruitItem extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: productEntity.imageUrl != null
                         ? CustomNetworkImage(imageUrl: productEntity.imageUrl!)
-                        : const ColoredBox(color: Colors.grey),
+                        : ColoredBox(color: context.palette.placeholder),
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -88,9 +89,9 @@ class FruitItem extends StatelessWidget {
                     onTap: () {
                       context.read<CartCubit>().addProduct(productEntity);
                     },
-                    child: const CircleAvatar(
+                    child: CircleAvatar(
                       backgroundColor: AppColors.primaryColor,
-                      child: Icon(Icons.add, color: Colors.white),
+                      child: Icon(Icons.add, color: context.palette.onPrimary),
                     ),
                   ),
                 ),

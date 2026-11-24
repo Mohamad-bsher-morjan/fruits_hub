@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruits_hub/core/utils/app_colors.dart';
@@ -32,7 +33,7 @@ class CartItem extends StatelessWidget {
               Container(
                 width: 73,
                 height: 92,
-                decoration: const BoxDecoration(color: Color(0xfff3f5f7)),
+                decoration: BoxDecoration(color: context.palette.card),
                 child: CustomNetworkImage(
                   imageUrl: cartItemEntity.productEntity.imageUrl!,
                 ),
@@ -56,7 +57,13 @@ class CartItem extends StatelessWidget {
                               cartItemEntity,
                             );
                           },
-                          child: SvgPicture.asset(Assets.imagesTrash),
+                          child: SvgPicture.asset(
+                            Assets.imagesTrash,
+                            colorFilter: ColorFilter.mode(
+                              context.palette.mutedIcon,
+                              BlendMode.srcIn,
+                            ),
+                          ),
                         ),
                       ],
                     ),

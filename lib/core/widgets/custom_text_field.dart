@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -29,21 +30,21 @@ class CustomTextFormField extends StatelessWidget {
       keyboardType: textInputType,
       decoration: InputDecoration(
         suffixIcon: suffixIcon,
-        hintStyle: AppStyles.bold13.copyWith(color: const Color(0xFF949D9E)),
+        hintStyle: AppStyles.bold13.copyWith(color: context.palette.hint),
         hintText: hintText,
         filled: true,
-        fillColor: const Color(0xFFF9FAFA),
-        border: buildBorder(),
-        enabledBorder: buildBorder(),
-        focusedBorder: buildBorder(),
+        fillColor: context.palette.fieldFill,
+        border: buildBorder(context),
+        enabledBorder: buildBorder(context),
+        focusedBorder: buildBorder(context),
       ),
     );
   }
 
-  OutlineInputBorder buildBorder() {
+  OutlineInputBorder buildBorder(BuildContext context) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(4),
-      borderSide: const BorderSide(width: 1, color: Color(0xFFE6E9E9)),
+      borderSide: BorderSide(width: 1, color: context.palette.border),
     );
   }
 }
