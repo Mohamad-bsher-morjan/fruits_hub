@@ -33,9 +33,10 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 const SizedBox(height: 16),
                 CustomHomeAppBar(),
                 const SizedBox(height: 16),
-                SearchTextField(onChanged: (query) {
-                  context.read<ProductsCubit>().searchProducts(query: query);
-                },),
+
+                SearchTextField(),
+             
+
                 const SizedBox(height: 12),
                 FeaturedList(),
                 const SizedBox(height: 12),

@@ -27,6 +27,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
         builder: (context) =>
             CheckoutView(cartEntity: settings.arguments as CartEntity),
       );
+   
+
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());
   }

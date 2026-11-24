@@ -4,8 +4,15 @@ import 'package:fruits_hub/core/utils/app_images.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
 
 class SearchTextField extends StatelessWidget {
-  const SearchTextField({super.key, this.onChanged,});
-final void Function(String value)? onChanged;
+  const SearchTextField({
+    super.key,
+    this.controller,
+    this.onSubmitted,
+  });
+
+  final TextEditingController? controller;
+  final ValueChanged<String>? onSubmitted;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,8 +26,11 @@ final void Function(String value)? onChanged;
           ),
         ],
       ),
-      child: TextField(onChanged:onChanged,
+      child: TextField(
+        controller: controller,
         keyboardType: TextInputType.text,
+        textInputAction: TextInputAction.search,
+        onSubmitted: onSubmitted,
         decoration: InputDecoration(
           prefixIcon: SizedBox(
             width: 20,
