@@ -6,6 +6,7 @@ import 'package:fruits_hub/features/home/presentation/views/model/menu_item_mode
 
 
 
+
 class MenuItemWidget extends StatelessWidget {
   final MenuItemModel item;
 
@@ -28,10 +29,13 @@ class MenuItemWidget extends StatelessWidget {
         style: AppStyles.regular13,
         textAlign: TextAlign.right,
       ),
-      trailing: const Icon(
-        Icons.chevron_left,
-        color: Color(0xFF949D9E),
-      ),
+      trailing: item.trailing ??
+          const Icon(
+            Icons.chevron_left,
+            color: Color(0xFF949D9E),
+          ),
+      onTap: item.onTap,
     );
   }
 }
+

@@ -55,6 +55,7 @@ dependencies:
   flutter_paypal_payment: ^1.0.8
   rive: ^0.14.11
   uuid: ^4.6.0
+  awesome_icons: ^1.1.1
 
 dev_dependencies:
   flutter_launcher_icons: "^0.14.4"

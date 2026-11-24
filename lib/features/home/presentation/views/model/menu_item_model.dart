@@ -1,9 +1,18 @@
-import 'package:flutter/material.dart';
+
+import 'dart:ui';
+
+import 'package:flutter/widgets.dart';
 
 class MenuItemModel {
   final String title;
   final IconData icon;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
+  final Widget? trailing;
 
-  MenuItemModel({required this.title, required this.icon, required this.onTap});
+  const MenuItemModel({
+    required this.title,
+    required this.icon,
+    this.onTap,
+    this.trailing,
+  });
 }
