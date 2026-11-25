@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/helper_functions/get_user.dart';
 import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:fruits_hub/core/utils/app_images.dart';
 import 'package:fruits_hub/core/utils/app_text_styles.dart';
@@ -46,13 +47,13 @@ class ProfileHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'أحمد سرب',
+                getUser().name,
                 style: AppStyles.bold16,
                 textAlign: TextAlign.right,
               ),
               const SizedBox(height: 6),
               Text(
-                'mail@mail.com',
+                getUser().email,
                 style: AppStyles.regular13.copyWith(
                   color: context.palette.hint,
                 ),

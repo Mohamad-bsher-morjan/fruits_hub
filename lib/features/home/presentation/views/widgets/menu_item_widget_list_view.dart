@@ -4,6 +4,7 @@ import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:fruits_hub/core/theme/theme_provider.dart';
 import 'package:fruits_hub/features/home/presentation/views/model/menu_item_model.dart';
 import 'package:fruits_hub/features/home/presentation/views/widgets/menu_item_widget.dart';
+import 'package:fruits_hub/features/home/presentation/views/widgets/personal_profile_view.dart';
 import 'package:provider/provider.dart';
 
 class MenuItemsWidgetListView extends StatefulWidget {
@@ -23,7 +24,9 @@ class _MenuItemsWidgetListViewState extends State<MenuItemsWidgetListView> {
       MenuItemModel(
         title: 'الملف الشخصي',
         icon: Icons.person_outline,
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, PersonalProfileView.routeName);
+        },
       ),
       MenuItemModel(
         title: 'طلباتي',
