@@ -33,10 +33,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 const SizedBox(height: 16),
                 CustomHomeAppBar(),
                 const SizedBox(height: 16),
-
                 SearchTextField(),
-             
-
                 const SizedBox(height: 12),
                 FeaturedList(),
                 const SizedBox(height: 12),
