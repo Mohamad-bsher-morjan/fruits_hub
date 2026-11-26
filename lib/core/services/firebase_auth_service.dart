@@ -81,6 +81,9 @@ class FirebaseAuthService {
       );
     }
   }
+  Future<void> signOut() async {
+  await FirebaseAuth.instance.signOut();
+}
 
   Future<User> signInWithGoogle() async {
     try {
@@ -160,7 +163,7 @@ class FirebaseAuthService {
       log(
         'FirebaseAuthException in FirebaseAuthService.updateDisplayName : ${e.toString()} and code is ${e.code}',
       );
-      throw CustomException(message: _getProfileUpdateErrorMessage(e));
+      throw CustomException(message: getProfileUpdateErrorMessage(e));
     } catch (e) {
       log('Exception in FirebaseAuthService.updateDisplayName : ${e.toString()}');
       throw CustomException(
@@ -182,7 +185,7 @@ class FirebaseAuthService {
       log(
         'FirebaseAuthException in FirebaseAuthService.verifyBeforeUpdateEmail : ${e.toString()} and code is ${e.code}',
       );
-      throw CustomException(message: _getProfileUpdateErrorMessage(e));
+      throw CustomException(message: getProfileUpdateErrorMessage(e));
     } catch (e) {
       log(
         'Exception in FirebaseAuthService.verifyBeforeUpdateEmail : ${e.toString()}',
@@ -228,7 +231,7 @@ class FirebaseAuthService {
       log(
         'FirebaseAuthException in FirebaseAuthService.changePassword : ${e.toString()} and code is ${e.code}',
       );
-      throw CustomException(message: _getPasswordChangeErrorMessage(e));
+      throw CustomException(message: getPasswordChangeErrorMessage(e));
     } on CustomException {
       rethrow;
     } catch (e) {
@@ -239,7 +242,7 @@ class FirebaseAuthService {
     }
   }
 
-  String _getPasswordChangeErrorMessage(FirebaseAuthException e) {
+  String getPasswordChangeErrorMessage(FirebaseAuthException e) {
     switch (e.code) {
       case 'wrong-password':
       case 'invalid-credential':
@@ -255,7 +258,7 @@ class FirebaseAuthService {
     }
   }
 
-  String _getProfileUpdateErrorMessage(FirebaseAuthException e) {
+  String getProfileUpdateErrorMessage(FirebaseAuthException e) {
     switch (e.code) {
       case 'requires-recent-login':
         return 'سجل الدخول مرة أخرى ثم حاول تغيير البريد الإلكتروني';

@@ -196,4 +196,10 @@ class AuthRepoImpl extends AuthRepo {
       );
     }
   }
+
+  @override
+  Future<void> signOut()async {
+      await firebaseAuthService.signOut();
+
+  }
 }

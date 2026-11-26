@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub/core/services/get_it_service.dart';
 import 'package:fruits_hub/core/widgets/custom_button.dart';
+import 'package:fruits_hub/features/auth/domain/repos/auth_repo.dart';
+import 'package:fruits_hub/features/auth/presentation/views/signin_view.dart';
 import 'package:fruits_hub/features/home/presentation/views/widgets/menu_item_widget_list_view.dart';
 import 'package:fruits_hub/features/home/presentation/views/widgets/profile_header.dart';
 
@@ -18,12 +21,22 @@ class ProfileViewBody extends StatelessWidget {
             const SizedBox(height: 24),
             MenuItemsWidgetListView(),
             const SizedBox(height: 24),
-            CustomButton(title: 'تسجيل الخروج', onPressed: () {}),
+            CustomButton(
+              title: 'تسجيل الخروج',
+              onPressed: () async {
+                await getIt<AuthRepo>().signOut();
+
+                if (!context.mounted) return;
+
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  SigninView.routeName,
+                  (route) => false,
+                );
+              },
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-  

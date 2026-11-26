@@ -23,6 +23,6 @@ abstract class AuthRepo {
     required String currentPassword,
     required String newPassword,
   });
-
+  Future<void> signOut();
   Future<UserEntity> getUserData({required String uid});
 }
