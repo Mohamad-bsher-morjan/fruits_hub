@@ -14,7 +14,11 @@ class FavoritesView extends StatelessWidget {
       appBar: AppBar(title: const Text('مفضلاتي')),
       body: BlocBuilder<FavoriteCubit, FavoriteState>(
         builder: (context, state) {
-          if (state.favorites.isEmpty) {
+          final favoriteProducts = context
+              .read<FavoriteCubit>()
+              .favoriteProducts;
+
+          if (favoriteProducts.isEmpty) {
             return Center(
               child: Text(
                 'لا توجد منتجات في المفضلة',
@@ -27,7 +31,7 @@ class FavoritesView extends StatelessWidget {
 
           return GridView.builder(
             padding: const EdgeInsets.all(16),
-            itemCount: state.favorites.length,
+            itemCount: favoriteProducts.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 163 / 231,
@@ -35,7 +39,7 @@ class FavoritesView extends StatelessWidget {
               crossAxisSpacing: 16,
             ),
             itemBuilder: (context, index) =>
-                FruitItem(productEntity: state.favorites[index]),
+                FruitItem(productEntity: favoriteProducts[index]),
           );
         },
       ),

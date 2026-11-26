@@ -1,18 +1,23 @@
 import 'package:bloc/bloc.dart';
 import 'package:fruits_hub/core/entities/product_entity.dart';
+import 'package:meta/meta.dart';
 
 part 'favorite_state.dart';
 
 class FavoriteCubit extends Cubit<FavoriteState> {
-  FavoriteCubit() : super(const FavoriteInitial());
+  FavoriteCubit() : super(FavoriteInitial());
 
-  void toggleFavorite(ProductEntity product) {
-    final favorites = List<ProductEntity>.from(state.favorites);
-    if (favorites.contains(product)) {
-      favorites.remove(product);
+  List<ProductEntity> favoriteProducts = [];
+
+  void toggleFavorite(ProductEntity productEntity) {
+    bool isProductExist = favoriteProducts.contains(productEntity);
+
+    if (isProductExist) {
+      favoriteProducts.remove(productEntity);
+      emit(FavoriteItemRemoved());
     } else {
-      favorites.add(product);
+      favoriteProducts.add(productEntity);
+      emit(FavoriteItemAdded());
     }
-    emit(FavoriteUpdated(List.unmodifiable(favorites)));
   }
 }

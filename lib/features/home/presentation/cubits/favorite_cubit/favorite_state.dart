@@ -1,15 +1,10 @@
 part of 'favorite_cubit.dart';
 
-sealed class FavoriteState {
-  const FavoriteState(this.favorites);
+@immutable
+abstract class FavoriteState {}
 
-  final List<ProductEntity> favorites;
-}
+final class FavoriteInitial extends FavoriteState {}
 
-final class FavoriteInitial extends FavoriteState {
-  const FavoriteInitial() : super(const []);
-}
+final class FavoriteItemAdded extends FavoriteState {}
 
-final class FavoriteUpdated extends FavoriteState {
-  const FavoriteUpdated(super.favorites);
-}
+final class FavoriteItemRemoved extends FavoriteState {}
