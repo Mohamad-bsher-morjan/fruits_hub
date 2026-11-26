@@ -193,6 +193,68 @@ class FirebaseAuthService {
     }
   }
 
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      throw CustomException(message: 'يجب تسجيل الدخول أولاً');
+    }
+
+    final hasPasswordProvider = user.providerData.any(
+      (provider) => provider.providerId == 'password',
+    );
+    if (!hasPasswordProvider) {
+      throw CustomException(
+        message: 'هذا الحساب مسجل بواسطة جوجل ولا يملك كلمة مرور',
+      );
+    }
+
+    final email = user.email;
+    if (email == null) {
+      throw CustomException(message: 'لا يوجد بريد إلكتروني مرتبط بهذا الحساب');
+    }
+
+    try {
+      final credential = EmailAuthProvider.credential(
+        email: email,
+        password: currentPassword,
+      );
+
+      await user.reauthenticateWithCredential(credential);
+      await user.updatePassword(newPassword);
+    } on FirebaseAuthException catch (e) {
+      log(
+        'FirebaseAuthException in FirebaseAuthService.changePassword : ${e.toString()} and code is ${e.code}',
+      );
+      throw CustomException(message: _getPasswordChangeErrorMessage(e));
+    } on CustomException {
+      rethrow;
+    } catch (e) {
+      log('Exception in FirebaseAuthService.changePassword : ${e.toString()}');
+      throw CustomException(
+        message: 'لقد حدث خطأ ما , الرجاء المحاولة مرة اخرى',
+      );
+    }
+  }
+
+  String _getPasswordChangeErrorMessage(FirebaseAuthException e) {
+    switch (e.code) {
+      case 'wrong-password':
+      case 'invalid-credential':
+        return 'كلمة المرور الحالية غير صحيحة';
+      case 'weak-password':
+        return 'كلمة المرور الجديدة ضعيفة جداً';
+      case 'too-many-requests':
+        return 'محاولات كثيرة، حاول مرة أخرى لاحقاً';
+      case 'network-request-failed':
+        return 'تأكد من اتصالك بالانترنت';
+      default:
+        return 'لقد حدث خطأ ما, الرجاء المحاولة لاحقا';
+    }
+  }
+
   String _getProfileUpdateErrorMessage(FirebaseAuthException e) {
     switch (e.code) {
       case 'requires-recent-login':

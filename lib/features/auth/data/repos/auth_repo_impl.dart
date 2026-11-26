@@ -174,4 +174,26 @@ class AuthRepoImpl extends AuthRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    try {
+      await firebaseAuthService.changePassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      );
+      return right(true);
+    } on CustomException catch (e) {
+      log('CustomException in AuthRepoImpl.changePassword : ${e.toString()}');
+      return left(ServerFailure(errMessage: e.message));
+    } catch (e) {
+      log('Exception in AuthRepoImpl.changePassword : ${e.toString()}');
+      return left(
+        ServerFailure(errMessage: 'لقد حدث خطأ ما , الرجاء المحاولة مرة اخرى'),
+      );
+    }
+  }
 }

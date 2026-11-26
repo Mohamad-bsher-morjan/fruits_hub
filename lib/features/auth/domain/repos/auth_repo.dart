@@ -19,6 +19,10 @@ abstract class AuthRepo {
     required String name,
     required String email,
   });
+  Future<Either<Failure, bool>> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  });
 
   Future<UserEntity> getUserData({required String uid});
 }
