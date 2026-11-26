@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruits_hub/constants.dart';
 import 'package:fruits_hub/core/errors/exceptions.dart';
 import 'package:fruits_hub/core/errors/failure.dart';
+import 'package:fruits_hub/core/helper_functions/get_user.dart';
 import 'package:fruits_hub/core/services/data_service.dart';
 import 'package:fruits_hub/core/services/firebase_auth_service.dart';
 import 'package:fruits_hub/core/services/shared_preferences_singleton.dart';
@@ -131,5 +132,46 @@ class AuthRepoImpl extends AuthRepo {
   Future saveUserData({required UserEntity user}) async {
     var jsonData = jsonEncode(UserModel.fromEntity(user).toMap());
     await Prefs.setString(kUserData, jsonData);
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> updateUserProfile({
+    required String name,
+    required String email,
+  }) async {
+    try {
+      final firebaseUser = FirebaseAuth.instance.currentUser;
+      if (firebaseUser == null) {
+        return left(ServerFailure(errMessage: 'يجب تسجيل الدخول أولاً'));
+      }
+
+      final currentUser = getUser();
+      final updatedUser = UserEntity(
+        name: name,
+        email: email,
+        uId: firebaseUser.uid,
+      );
+
+      if (name != currentUser.name) {
+        await firebaseAuthService.updateDisplayName(name);
+      }
+      if (email != currentUser.email) {
+        await firebaseAuthService.verifyBeforeUpdateEmail(email);
+      }
+
+      await addUserData(user: updatedUser);
+      await saveUserData(user: updatedUser);
+      return right(updatedUser);
+    } on CustomException catch (e) {
+      log(
+        'CustomException in AuthRepoImpl.updateUserProfile : ${e.toString()}',
+      );
+      return left(ServerFailure(errMessage: e.message));
+    } catch (e) {
+      log('Exception in AuthRepoImpl.updateUserProfile : ${e.toString()}');
+      return left(
+        ServerFailure(errMessage: 'لقد حدث خطأ ما , الرجاء المحاولة مرة اخرى'),
+      );
+    }
   }
 }

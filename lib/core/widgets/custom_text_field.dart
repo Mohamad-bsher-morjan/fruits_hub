@@ -10,23 +10,41 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.onSaved,
     this.obscureText = false,
+    this.enabled = true,
+    this.readOnly = false,
+    this.enableInteractiveSelection = true,
+    this.controller,
+    this.validator,
   });
+
   final String hintText;
   final TextInputType textInputType;
   final Widget? suffixIcon;
   final void Function(String?)? onSaved;
   final bool obscureText;
+  final bool? enabled;
+  final bool readOnly;
+  final bool enableInteractiveSelection;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      enabled: enabled,
+      readOnly: readOnly,
+      enableInteractiveSelection: enableInteractiveSelection,
       obscureText: obscureText,
       onSaved: onSaved,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'هذا الحقل مطلوب';
-        }
-        return null;
-      },
+      validator:
+          validator ??
+          (value) {
+            if (value == null || value.isEmpty) {
+              return 'هذا الحقل مطلوب';
+            }
+            return null;
+          },
       keyboardType: textInputType,
       decoration: InputDecoration(
         suffixIcon: suffixIcon,

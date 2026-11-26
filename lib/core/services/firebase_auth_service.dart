@@ -147,6 +147,67 @@ class FirebaseAuthService {
     }
   }
 
+  Future<void> updateDisplayName(String name) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        throw CustomException(message: 'يجب تسجيل الدخول أولاً');
+      }
+      await user.updateDisplayName(name);
+    } on CustomException {
+      rethrow;
+    } on FirebaseAuthException catch (e) {
+      log(
+        'FirebaseAuthException in FirebaseAuthService.updateDisplayName : ${e.toString()} and code is ${e.code}',
+      );
+      throw CustomException(message: _getProfileUpdateErrorMessage(e));
+    } catch (e) {
+      log('Exception in FirebaseAuthService.updateDisplayName : ${e.toString()}');
+      throw CustomException(
+        message: 'لقد حدث خطأ ما , الرجاء المحاولة مرة اخرى',
+      );
+    }
+  }
+
+  Future<void> verifyBeforeUpdateEmail(String newEmail) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        throw CustomException(message: 'يجب تسجيل الدخول أولاً');
+      }
+      await user.verifyBeforeUpdateEmail(newEmail);
+    } on CustomException {
+      rethrow;
+    } on FirebaseAuthException catch (e) {
+      log(
+        'FirebaseAuthException in FirebaseAuthService.verifyBeforeUpdateEmail : ${e.toString()} and code is ${e.code}',
+      );
+      throw CustomException(message: _getProfileUpdateErrorMessage(e));
+    } catch (e) {
+      log(
+        'Exception in FirebaseAuthService.verifyBeforeUpdateEmail : ${e.toString()}',
+      );
+      throw CustomException(
+        message: 'لقد حدث خطأ ما , الرجاء المحاولة مرة اخرى',
+      );
+    }
+  }
+
+  String _getProfileUpdateErrorMessage(FirebaseAuthException e) {
+    switch (e.code) {
+      case 'requires-recent-login':
+        return 'سجل الدخول مرة أخرى ثم حاول تغيير البريد الإلكتروني';
+      case 'email-already-in-use':
+        return 'هذا البريد الإلكتروني مستخدم بالفعل';
+      case 'invalid-email':
+        return 'البريد الإلكتروني غير صحيح';
+      case 'network-request-failed':
+        return 'تأكد من اتصالك بالانترنت';
+      default:
+        return 'لقد حدث خطأ ما, الرجاء المحاولة لاحقا';
+    }
+  }
+
   bool isLoggedIn() {
     return FirebaseAuth.instance.currentUser != null;
   }
