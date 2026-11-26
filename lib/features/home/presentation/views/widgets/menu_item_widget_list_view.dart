@@ -1,10 +1,13 @@
 import 'package:awesome_icons/awesome_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub/core/theme/app_palette.dart';
 import 'package:fruits_hub/core/theme/theme_provider.dart';
 import 'package:fruits_hub/features/home/presentation/views/model/menu_item_model.dart';
 import 'package:fruits_hub/features/home/presentation/views/widgets/menu_item_widget.dart';
 import 'package:fruits_hub/features/home/presentation/views/widgets/personal_profile_view.dart';
+import 'package:fruits_hub/features/home/presentation/cubits/favorite_cubit/favorite_cubit.dart';
+import 'package:fruits_hub/features/home/presentation/views/favorites_view.dart';
 import 'package:provider/provider.dart';
 
 class MenuItemsWidgetListView extends StatefulWidget {
@@ -36,7 +39,17 @@ class _MenuItemsWidgetListViewState extends State<MenuItemsWidgetListView> {
       MenuItemModel(
         title: 'مفضلاتي',
         icon: Icons.favorite_outline,
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => BlocProvider.value(
+                value: context.read<FavoriteCubit>(),
+                child: const FavoritesView(),
+              ),
+            ),
+          );
+        },
       ),
       MenuItemModel(
         title: 'الإشعارات',
